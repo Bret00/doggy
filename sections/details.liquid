@@ -1,0 +1,50 @@
+<section class="details-section section-pad">
+  <div class="details-heading" data-reveal>
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading_line1 }}<br>{{ section.settings.heading_line2 }}</h2>
+  </div>
+  <div class="detail-list">
+    {%- for block in section.blocks -%}
+      <div class="detail-row" data-reveal {{ block.shopify_attributes }}>
+        <span class="detail-number">0{{ forloop.index }}</span>
+        <div><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></div>
+        {% render 'icon', name: block.settings.icon, size: 26 %}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Details",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE SMALL THINGS. DONE RIGHT." },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Ready for" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "real life." }
+  ],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Detail",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "A proper place to settle in." },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "The rigid platform extends over the footwell, giving your dog a continuous space to lie down." },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "layers-3", "options": [
+          { "value": "layers-3", "label": "Layers" },
+          { "value": "droplets", "label": "Droplets" },
+          { "value": "maximize-2", "label": "Maximize" },
+          { "value": "wind", "label": "Wind" }
+        ] }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "detail", "settings": { "title": "A proper place to settle in.", "text": "The rigid platform extends over the footwell, giving your dog a continuous space to lie down.", "icon": "layers-3" } },
+      { "type": "detail", "settings": { "title": "Their mess stays off your seats.", "text": "Protective side panels and a wipe-clean surface help keep everyday dirt and fur contained.", "icon": "droplets" } },
+      { "type": "detail", "settings": { "title": "Your backseat, when you need it.", "text": "The folding design makes space for a passenger, and packs away into the included storage bag.", "icon": "maximize-2" } }
+    ]
+  },
+  "presets": [{ "name": "Details" }]
+}
+{% endschema %}

@@ -1,0 +1,33 @@
+<section class="lifestyle" id="{{ section.settings.anchor_id }}">
+  {%- if section.settings.image -%}
+    <img src="{{ section.settings.image | image_url: width: 1800 }}" alt="{{ section.settings.image.alt | default: section.settings.heading_line1 | escape }}" class="lifestyle-photo" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy">
+  {%- else -%}
+    <img src="{{ 'lifestyle.webp' | asset_url }}" alt="A dog enjoying the extra room of the backseat extender inside a car" class="lifestyle-photo" width="1600" height="1067" loading="lazy">
+  {%- endif -%}
+  <div class="lifestyle-shade"></div>
+  <div class="lifestyle-copy" data-reveal>
+    <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading_line1 }}<br>{{ section.settings.heading_line2 }}</h2>
+    <p>{{ section.settings.body }}</p>
+    <a class="pill-button orange-button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_text }} {% render 'icon', name: 'arrow-up-right', size: 18 %}</a>
+  </div>
+  <span class="lifestyle-bottom">{{ section.settings.bottom_text }}</span>
+</section>
+
+{% schema %}
+{
+  "name": "Lifestyle",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "life" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE DESTINATION IS BETTER TOGETHER." },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Less “stay.”" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "More “let’s go.”" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "For muddy trails, spontaneous detours, and one very happy backseat driver." },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "Make room for more" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "default": "#shop" },
+    { "type": "text", "id": "bottom_text", "label": "Bottom strip text", "default": "TAKE THE SCENIC ROUTE. BRING THE DOG." }
+  ],
+  "presets": [{ "name": "Lifestyle" }]
+}
+{% endschema %}

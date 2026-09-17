@@ -1,0 +1,14 @@
+<div class="announcement-bar">
+  <span>{{ section.settings.announcement_left }}</span>
+  <span class="announcement-right">{{ section.settings.announcement_right }}{% render 'icon', name: 'move-up-right', size: 13 %}</span>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "text", "id": "announcement_left", "label": "Left text", "default": "GOOD DOGS. GREAT ADVENTURES." },
+    { "type": "text", "id": "announcement_right", "label": "Right text", "default": "GO FURTHER, TOGETHER " }
+  ]
+}
+{% endschema %}

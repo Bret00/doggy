@@ -1,0 +1,18 @@
+<div class="section-pad simple-page">
+  <h1 class="simple-page-title">Search</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="simple-search-form">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search products" aria-label="Search">
+    <button type="submit" class="pill-button dark-button">Search {% render 'icon', name: 'arrow-right', size: 17 %}</button>
+  </form>
+  {%- if search.performed -%}
+    <p style="margin:24px 0;color:#6b7463">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for &ldquo;{{ search.terms }}&rdquo;</p>
+    <div class="simple-collection-grid">
+      {%- for item in search.results -%}
+        <a href="{{ item.url }}" class="simple-collection-card">
+          {%- if item.featured_image -%}<img src="{{ item.featured_image | image_url: width: 600 }}" alt="{{ item.featured_image.alt | default: item.title | escape }}" width="600" height="600" loading="lazy">{%- endif -%}
+          <h3>{{ item.title }}</h3>
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

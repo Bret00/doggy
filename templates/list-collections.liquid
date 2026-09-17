@@ -1,0 +1,11 @@
+<div class="section-pad simple-page">
+  <h1 class="simple-page-title">Collections</h1>
+  <div class="simple-collection-grid">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" class="simple-collection-card">
+        {%- if collection.image -%}<img src="{{ collection.image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" width="600" height="600" loading="lazy">{%- endif -%}
+        <h3>{{ collection.title }}</h3>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>

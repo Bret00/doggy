@@ -1,0 +1,6 @@
+<div class="section-pad simple-page">
+  <span class="eyebrow">{{ article.published_at | date: '%B %d, %Y' }}</span>
+  <h1 class="simple-page-title">{{ article.title }}</h1>
+  {%- if article.image -%}<img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}" width="{{ article.image.width }}" height="{{ article.image.height }}" style="border-radius:9px;margin:24px 0">{%- endif -%}
+  <div class="simple-page-body">{{ article.content }}</div>
+</div>

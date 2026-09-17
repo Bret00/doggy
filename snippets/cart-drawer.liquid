@@ -1,0 +1,16 @@
+<div id="CartDrawer" class="drawer-overlay" data-cart-drawer hidden>
+  <div class="drawer-backdrop" data-cart-close></div>
+  <div class="cart-sheet" role="dialog" aria-modal="true" aria-label="Shopping bag">
+    <div class="cart-header">
+      <div>
+        <h2 class="sheet-title">Your bag <span>(<span data-cart-count>{{ cart.item_count }}</span>)</span></h2>
+        <button type="button" class="icon-close" data-cart-close aria-label="Close shopping bag">{% render 'icon', name: 'x', size: 22 %}</button>
+      </div>
+      <p class="sheet-description">A little more room for your next adventure.</p>
+    </div>
+
+    <div data-cart-body>
+      {%- render 'cart-drawer-body' -%}
+    </div>
+  </div>
+</div>

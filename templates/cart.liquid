@@ -1,0 +1,35 @@
+<div class="section-pad simple-page">
+  <h1 class="simple-page-title">Your bag</h1>
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-page-form">
+      {%- for item in cart.items -%}
+        <div class="cart-item">
+          <img src="{{ item.image | image_url: width: 220 }}" alt="{{ item.title | escape }}" width="112" height="112">
+          <div>
+            <h3>{{ item.product.title }}</h3>
+            <p>{{ item.variant.title | replace: 'Default Title', '' }}</p>
+            <span>{{ item.final_line_price | money }}</span>
+            <div class="cart-item-controls">
+              <div class="quantity-control">
+                <input type="number" name="updates[{{ forloop.index0 }}]" value="{{ item.quantity }}" min="0" style="width:50px;text-align:center;border:0;background:transparent">
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+      <div class="cart-total">
+        <div><span>Subtotal</span><strong>{{ cart.total_price | money }}</strong></div>
+        <p>Taxes and shipping are calculated at checkout.</p>
+        <button type="submit" name="update" class="pill-button orange-button" style="margin-bottom:14px">Update bag</button>
+        <button type="submit" name="checkout" class="pill-button dark-button">Checkout {% render 'icon', name: 'arrow-up-right', size: 19 %}</button>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="empty-bag">
+      {% render 'icon', name: 'shopping-bag', size: 50, stroke_width: 1 %}
+      <h3>Room for something good.</h3>
+      <p>Your bag is empty. Their next adventure is waiting.</p>
+      <a class="pill-button dark-button" href="{{ routes.root_url }}">Keep exploring {% render 'icon', name: 'arrow-right', size: 17 %}</a>
+    </div>
+  {%- endif -%}
+</div>

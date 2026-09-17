@@ -1,0 +1,16 @@
+<div class="section-pad simple-page">
+  <h1 class="simple-page-title">{{ collection.title }}</h1>
+  {%- if collection.products.size > 0 -%}
+    <div class="simple-collection-grid">
+      {%- for product in collection.products -%}
+        <a href="{{ product.url }}" class="simple-collection-card">
+          <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="600" height="600" loading="lazy">
+          <h3>{{ product.title }}</h3>
+          <span>{{ product.price | money }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <p>No products found in this collection.</p>
+  {%- endif -%}
+</div>

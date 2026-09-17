@@ -1,0 +1,154 @@
+{%- liquid
+  assign selected_product = section.settings.product
+  if selected_product != blank
+    assign product = selected_product
+  endif
+-%}
+<section class="shop-section section-pad" id="{{ section.settings.anchor_id }}" aria-labelledby="shop-title" data-product-section {% if product %}data-product-url="{{ product.url }}"{% endif %}>
+  {%- if product == blank -%}
+    <div class="details-heading" style="grid-column:1/-1">
+      <p>Select a product in the theme editor to show it here.</p>
+    </div>
+  {%- else -%}
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    <div class="product-gallery" data-reveal>
+      <div class="gallery-main">
+        <span class="gallery-tag">{{ section.settings.gallery_tag }}</span>
+        {%- if product.images.size > 0 -%}
+          {%- for image in product.images -%}
+            <img src="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" data-gallery-image {% unless forloop.first %}hidden{% endunless %}>
+          {%- endfor -%}
+        {%- else -%}
+          <img src="{{ 'product.webp' | asset_url }}" alt="{{ product.title | escape }}" width="1000" height="1000" data-gallery-image>
+        {%- endif -%}
+        <div class="gallery-controls">
+          <button type="button" data-gallery-prev aria-label="Previous product image">{% render 'icon', name: 'chevron-left', size: 20 %}</button>
+          {%- assign gallery_total = product.images.size | at_least: 1 -%}
+          <span data-gallery-position>01 / {% if gallery_total < 10 %}0{% endif %}{{ gallery_total }}</span>
+          <button type="button" data-gallery-next aria-label="Next product image">{% render 'icon', name: 'chevron-right', size: 20 %}</button>
+        </div>
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="gallery-thumbnails">
+          {%- for image in product.images -%}
+            <button type="button" data-gallery-thumb="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}" aria-label="Show product image {{ forloop.index }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+              <img src="{{ image | image_url: width: 160 }}" alt="" width="76" height="76" loading="lazy">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="shop-copy" data-reveal>
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 id="shop-title">{{ product.title }}</h2>
+
+      <div class="product-price" data-product-price>
+        <span data-price>{{ current_variant.price | money }}</span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="compare-price" data-compare-price>{{ current_variant.compare_at_price | money }}</span>
+        {%- endif -%}
+      </div>
+
+      <p class="product-summary">{{ section.settings.summary | default: product.description | strip_html | truncatewords: 40 }}</p>
+
+      <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
+
+      {%- form 'product', product, data-product-form: true -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="color-selection" data-option-index="{{ forloop.index0 }}">
+              <span>{{ option.name }} &mdash; <strong data-option-value>{{ option.selected_value }}</strong></span>
+              <div class="option-pills">
+                {%- for value in option.values -%}
+                  <button type="button" class="option-pill{% if value == option.selected_value %} active{% endif %}" data-option-select data-option-index="{{ forloop.parentloop.index0 }}" data-option-value="{{ value | escape }}">{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="color-selection">
+            <span>{{ section.settings.variant_label }}</span>
+            <span class="color-swatch" aria-hidden="true">{% render 'icon', name: 'check', size: 15 %}</span>
+          </div>
+        {%- endunless -%}
+
+        <div class="product-inclusions">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'inclusion' -%}
+              <span {{ block.shopify_attributes }}>{% render 'icon', name: 'check', size: 15 %} {{ block.settings.text }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <div class="add-row">
+          <div class="quantity-control" aria-label="Product quantity">
+            <button type="button" data-qty-decrease aria-label="Decrease quantity">{% render 'icon', name: 'minus', size: 16 %}</button>
+            <output data-qty-output aria-live="polite">1</output>
+            <button type="button" data-qty-increase aria-label="Increase quantity">{% render 'icon', name: 'plus', size: 16 %}</button>
+          </div>
+          <input type="hidden" name="quantity" value="1" data-qty-input>
+          <button type="submit" class="pill-button dark-button add-button" data-add-to-cart {% unless current_variant.available %}disabled{% endunless %}>
+            <span data-add-label>{% if current_variant.available %}Add to bag{% else %}Sold out{% endif %}</span> {% render 'icon', name: 'shopping-bag', size: 18 %}
+          </button>
+        </div>
+      {%- endform -%}
+
+      <p class="retailer-note">{{ section.settings.reassurance_note }}</p>
+
+      <div class="product-accordion">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'accordion_item' -%}
+            <details class="accordion-item" name="product-accordion-group" {{ block.shopify_attributes }}>
+              <summary data-slot="accordion-trigger">{{ block.settings.title }}{% render 'icon', name: 'chevron-down', size: 16 %}</summary>
+              <div data-slot="accordion-content">{{ block.settings.content }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Shop product",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "shop" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE GOOD MILES ESSENTIAL" },
+    { "type": "text", "id": "gallery_tag", "label": "Gallery tag", "default": "MEET THEIR NEW FAVOURITE SPOT" },
+    { "type": "textarea", "id": "summary", "label": "Summary (blank = use product description)" },
+    { "type": "text", "id": "variant_label", "label": "Single-variant label", "default": "Colour — Black" },
+    { "type": "text", "id": "reassurance_note", "label": "Reassurance note", "default": "Secure checkout. Ships from Canada. See our shipping & returns policy for delivery times." }
+  ],
+  "blocks": [
+    {
+      "type": "inclusion",
+      "name": "Inclusion bullet",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "52 × 25 in platform" }]
+    },
+    {
+      "type": "accordion_item",
+      "name": "Accordion item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Dimensions & materials" },
+        { "type": "richtext", "id": "content", "label": "Content" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "inclusion", "settings": { "text": "52 × 25 in platform" } },
+      { "type": "inclusion", "settings": { "text": "Foldable support panels" } },
+      { "type": "inclusion", "settings": { "text": "Safety belt included" } },
+      { "type": "inclusion", "settings": { "text": "Storage bag included" } },
+      { "type": "accordion_item", "settings": { "title": "Dimensions & materials", "content": "<p>Platform: 52 × 25 in / approx. 132 × 64 cm<br>Surface: Black PU leather<br>Structure: Rigid fiberboard support panels<br>Features: Mesh window, storage pockets, folding base</p>" } },
+      { "type": "accordion_item", "settings": { "title": "A note on travelling together", "content": "<p>This extender protects seats and provides a supported platform. It is not a crash-tested restraint. Follow the manufacturer’s installation instructions and use appropriate pet restraint for your vehicle.</p>" } }
+    ]
+  },
+  "presets": [{ "name": "Shop product" }]
+}
+{% endschema %}

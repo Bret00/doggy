@@ -1,0 +1,39 @@
+{%- if cart.item_count > 0 -%}
+  {%- for item in cart.items -%}
+    <div class="cart-item">
+      <img src="{{ item.image | image_url: width: 220 }}" alt="{{ item.title | escape }}" width="112" height="112" loading="lazy">
+      <div>
+        <h3>{{ item.product.title }}</h3>
+        <p>{{ item.variant.title | replace: 'Default Title', '' }}</p>
+        <span>{{ item.final_line_price | money }}</span>
+        <div class="cart-item-controls">
+          <div class="quantity-control">
+            <button type="button" class="cart-qty-decrease" data-cart-qty-change data-line="{{ forloop.index }}" data-qty="{{ item.quantity | minus: 1 }}" aria-label="Remove one from bag">{% render 'icon', name: 'minus', size: 15 %}</button>
+            <output>{{ item.quantity }}</output>
+            <button type="button" class="cart-qty-increase" data-cart-qty-change data-line="{{ forloop.index }}" data-qty="{{ item.quantity | plus: 1 }}" aria-label="Add one to bag">{% render 'icon', name: 'plus', size: 15 %}</button>
+          </div>
+          <button type="button" class="remove-button" data-cart-qty-change data-line="{{ forloop.index }}" data-qty="0">Remove</button>
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+
+  <div class="cart-note">
+    {% render 'icon', name: 'paw-print', size: 22 %}
+    <p>Next adventure?<br><strong>They&rsquo;re already packed.</strong></p>
+  </div>
+
+  <div class="cart-total">
+    <div><span>Subtotal</span><strong>{{ cart.total_price | money }}</strong></div>
+    <p>Taxes and shipping are calculated at checkout.</p>
+    <a class="pill-button dark-button" href="{{ routes.cart_url }}">Checkout {% render 'icon', name: 'arrow-up-right', size: 19 %}</a>
+    <button type="button" class="continue-shopping" data-cart-close>Keep exploring</button>
+  </div>
+{%- else -%}
+  <div class="empty-bag">
+    {% render 'icon', name: 'shopping-bag', size: 50, stroke_width: 1 %}
+    <h3>Room for something good.</h3>
+    <p>Your bag is empty. Their next adventure is waiting.</p>
+    <a class="pill-button dark-button" href="#shop" data-cart-close>Meet the extender {% render 'icon', name: 'arrow-right', size: 17 %}</a>
+  </div>
+{%- endif -%}

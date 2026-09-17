@@ -1,0 +1,13 @@
+<div id="MobileNav" class="drawer-overlay" data-nav-drawer hidden>
+  <div class="drawer-backdrop" data-nav-close></div>
+  <div class="navigation-sheet" role="dialog" aria-modal="true" aria-label="Navigation">
+    <h2 class="wordmark sheet-title">{{ shop.name | default: 'good miles' }}</h2>
+    <p class="sheet-description">For your favourite passenger.</p>
+    <nav aria-label="Mobile navigation">
+      {%- for link in menu.links -%}
+        <a href="{{ link.url }}" data-nav-close>{{ link.title }}{% render 'icon', name: 'arrow-up-right' %}</a>
+      {%- endfor -%}
+      <a href="{{ shop_link }}" data-nav-close>{{ shop_link_text }}{% render 'icon', name: 'arrow-up-right' %}</a>
+    </nav>
+  </div>
+</div>

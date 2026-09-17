@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+
+  {%- if page_title != blank -%}
+    <title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+  {%- else -%}
+    <title>{{ shop.name }}</title>
+  {%- endif -%}
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  {{ 'body.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {{ 'display.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {{ 'good-miles.css' | asset_url | stylesheet_tag }}
+  <style>
+    :root{
+      --page: {{ settings.color_page }};
+      --background: {{ settings.color_page }};
+      --ink: {{ settings.color_ink }};
+      --foreground: {{ settings.color_ink }};
+      --orange: {{ settings.color_accent }};
+      --accent: {{ settings.color_accent }};
+      --ring: {{ settings.color_accent }};
+    }
+  </style>
+</head>
+<body class="antialiased">
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <a href="#MainContent" class="skip-link">Skip to content</a>
+
+  <main id="MainContent">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <span class="sr-only" role="status" data-cart-announce></span>
+
+  <script src="{{ 'good-miles.js' | asset_url }}" defer></script>
+  <script type="module" src="{{ 'product-scene.js' | asset_url }}"></script>
+</body>
+</html>

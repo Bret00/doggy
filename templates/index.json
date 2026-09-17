@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "feature-strip": { "type": "feature-strip" },
+    "intro": {
+      "type": "intro",
+      "settings": { "anchor_id": "" }
+    },
+    "design-story": { "type": "design-story" },
+    "lifestyle": { "type": "lifestyle" },
+    "details": { "type": "details" },
+    "shop-product": { "type": "shop-product" },
+    "faq": { "type": "faq" },
+    "closing-banner": { "type": "closing-banner" }
+  },
+  "order": ["hero", "feature-strip", "intro", "design-story", "lifestyle", "details", "shop-product", "faq", "closing-banner"]
+}

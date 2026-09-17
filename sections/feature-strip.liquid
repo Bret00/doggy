@@ -1,0 +1,37 @@
+<section class="feature-strip" aria-label="Product highlights">
+  {%- for block in section.blocks -%}
+    <div {{ block.shopify_attributes }}>{% render 'icon', name: block.settings.icon %}<span>{{ block.settings.label }}</span></div>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Feature strip",
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "layers-3", "options": [
+          { "value": "layers-3", "label": "Layers" },
+          { "value": "droplets", "label": "Droplets" },
+          { "value": "maximize-2", "label": "Maximize" },
+          { "value": "wind", "label": "Wind" },
+          { "value": "check", "label": "Check" },
+          { "value": "paw-print", "label": "Paw print" }
+        ] },
+        { "type": "text", "id": "label", "label": "Label", "default": "Feature" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "feature", "settings": { "icon": "layers-3", "label": "Hard-bottom support" } },
+      { "type": "feature", "settings": { "icon": "droplets", "label": "Waterproof PU leather" } },
+      { "type": "feature", "settings": { "icon": "maximize-2", "label": "Room to stretch out" } },
+      { "type": "feature", "settings": { "icon": "wind", "label": "Breathable mesh window" } }
+    ]
+  },
+  "presets": [{ "name": "Feature strip" }]
+}
+{% endschema %}

@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "shop-product": { "type": "shop-product", "settings": { "anchor_id": "" } },
+    "feature-strip": { "type": "feature-strip" },
+    "faq": { "type": "faq" }
+  },
+  "order": ["shop-product", "feature-strip", "faq"]
+}

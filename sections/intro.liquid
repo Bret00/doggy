@@ -1,0 +1,19 @@
+<section class="intro section-pad" data-reveal id="{{ section.settings.anchor_id }}">
+  <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+  <h2>{{ section.settings.heading_line1 }}<br><span>{{ section.settings.heading_line2 }}</span></h2>
+  <p>{{ section.settings.body }}</p>
+</section>
+
+{% schema %}
+{
+  "name": "Intro",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID (for nav links)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THEIR SEAT. EVERY ADVENTURE." },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "They go wherever you go." },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2 (muted)", "default": "Make the journey a good one." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "From the coffee run to the long way home, turn your backseat into their favourite place to be." }
+  ],
+  "presets": [{ "name": "Intro" }]
+}
+{% endschema %}

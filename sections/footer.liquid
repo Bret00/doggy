@@ -1,0 +1,29 @@
+<footer>
+  <div class="footer-top">
+    <a class="wordmark" href="{{ routes.root_url }}">{{ section.settings.logo_text }}<span class="brand-dot">.</span></a>
+    <span>{{ section.settings.tagline }}</span>
+    <a href="{{ section.settings.shop_link }}">{{ section.settings.shop_link_text }} {% render 'icon', name: 'arrow-up-right', size: 17 %}</a>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}.</span>
+    {%- if section.settings.disclaimer != blank -%}<span>{{ section.settings.disclaimer }}</span>{%- endif -%}
+    {%- if section.settings.source_link != blank -%}
+      <a href="{{ section.settings.source_link }}" target="_blank" rel="noopener noreferrer">{{ section.settings.source_link_text }} {% render 'icon', name: 'arrow-up-right', size: 13 %}</a>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Logo text", "default": "good miles" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "FOR THE RIDE. AND THE RIDER." },
+    { "type": "url", "id": "shop_link", "label": "\"Shop\" link", "default": "#shop" },
+    { "type": "text", "id": "shop_link_text", "label": "\"Shop\" link text", "default": "Shop the extender" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer text", "default": "Manufacturer-rated platform support. Not a crash-safety rating." },
+    { "type": "url", "id": "source_link", "label": "Source link (optional)" },
+    { "type": "text", "id": "source_link_text", "label": "Source link text", "default": "Product source" }
+  ]
+}
+{% endschema %}

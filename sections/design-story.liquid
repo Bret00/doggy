@@ -1,0 +1,73 @@
+<section class="design-story" id="{{ section.settings.anchor_id }}" data-story aria-label="Explore the backseat extender design">
+  <div class="story-sticky">
+    <div class="story-header">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <span class="story-counter" data-story-counter>01 <span>/ 0{{ section.blocks.size }}</span></span>
+    </div>
+    <div class="story-stage">
+      <div class="story-copy" aria-live="off" data-story-copy>
+        {%- for block in section.blocks -%}
+          <div class="story-chapter{% if forloop.first %} active{% endif %}" aria-hidden="{% unless forloop.first %}true{% else %}false{% endunless %}" {{ block.shopify_attributes }}>
+            <span class="story-eyebrow">{{ block.settings.eyebrow }}</span>
+            <h2><span>{{ block.settings.heading_line1 }}<br></span><span class="accent-text">{{ block.settings.heading_line2 }}<br></span></h2>
+            <p>{{ block.settings.body }}</p>
+            <div class="story-detail">{% render 'icon', name: block.settings.icon, size: 18 %}{{ block.settings.detail_text }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="story-model">
+        <div class="technical-grid" aria-hidden="true"></div>
+        {%- render 'product-scene', mode: 'story', fallback_image: section.settings.product.featured_image -%}
+        <span class="model-caption" data-story-caption>{{ section.blocks.first.settings.caption }}</span>
+        <span class="model-disclaimer">3D product illustration</span>
+      </div>
+    </div>
+    <div class="chapter-tabs" aria-label="Design chapters" data-story-tabs>
+      {%- for block in section.blocks -%}
+        <button type="button" data-story-tab="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}step{% endif %}"><span>0{{ forloop.index }}</span>{{ block.settings.tab_label }}<span class="tab-track"></span></button>
+      {%- endfor -%}
+    </div>
+    <div class="story-progress" aria-hidden="true" data-story-progress></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Design story",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "design" },
+    { "type": "product", "id": "product", "label": "Product (for 3D view fallback image)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BUILT FOR LIFE TOGETHER" }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter",
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "More room" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A LITTLE MORE ROOM" },
+        { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Their backseat." },
+        { "type": "text", "id": "heading_line2", "label": "Heading line 2 (accent)", "default": "Reimagined." },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Turn the space above the footwell into a wide, continuous platform." },
+        { "type": "text", "id": "detail_text", "label": "Detail text", "default": "52 × 25 in platform" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "maximize-2", "options": [
+          { "value": "maximize-2", "label": "Maximize" },
+          { "value": "layers-3", "label": "Layers" },
+          { "value": "droplets", "label": "Droplets" },
+          { "value": "wind", "label": "Wind" }
+        ] },
+        { "type": "text", "id": "caption", "label": "3D view caption", "default": "DESIGNED AROUND THEIR EVERYDAY" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "chapter", "settings": { "tab_label": "More room", "eyebrow": "A LITTLE MORE ROOM", "heading_line1": "Their backseat.", "heading_line2": "Reimagined.", "body": "Turn the space above the footwell into a wide, continuous platform. More room to stretch out, curl up, and enjoy the ride.", "detail_text": "52 × 25 in platform", "icon": "maximize-2", "caption": "DESIGNED AROUND THEIR EVERYDAY" } },
+      { "type": "chapter", "settings": { "tab_label": "Solid support", "eyebrow": "A SOLID FOUNDATION", "heading_line1": "Big dog energy.", "heading_line2": "Meet real support.", "body": "Rigid support panels sit beneath the soft-touch surface, creating a stable base that holds its shape across the backseat.", "detail_text": "Up to 400 lb rated support¹", "icon": "layers-3", "caption": "EXPLODED CONSTRUCTION VIEW" } },
+      { "type": "chapter", "settings": { "tab_label": "Wipe clean", "eyebrow": "BRING ON THE MESS", "heading_line1": "Muddy paws.", "heading_line2": "Clean seats.", "body": "A waterproof PU leather surface helps keep wet paws, fur, and everyday mess off your upholstery. Wipe clean. Head out again.", "detail_text": "Waterproof · Scratch-resistant", "icon": "droplets", "caption": "DESIGNED AROUND THEIR EVERYDAY" } },
+      { "type": "chapter", "settings": { "tab_label": "Little details", "eyebrow": "THOUGHT THROUGH", "heading_line1": "A better view.", "heading_line2": "A happier crew.", "body": "A breathable mesh window keeps the front of the car in sight. Built-in pockets keep treats, toys, and the little essentials close.", "detail_text": "Mesh window + storage pockets", "icon": "wind", "caption": "A CLOSER LOOK AT THE DETAILS" } }
+    ]
+  },
+  "presets": [{ "name": "Design story" }]
+}
+{% endschema %}
