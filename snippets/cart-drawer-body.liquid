@@ -20,7 +20,7 @@
 
   <div class="cart-note">
     {% render 'icon', name: 'paw-print', size: 22 %}
-    <p>Next adventure?<br><strong>They&rsquo;re already packed.</strong></p>
+    <p>30-day guarantee.<br><strong>Send it back if it doesn&rsquo;t fit.</strong></p>
   </div>
 
   <div class="cart-total">
@@ -32,8 +32,8 @@
 {%- else -%}
   <div class="empty-bag">
     {% render 'icon', name: 'shopping-bag', size: 50, stroke_width: 1 %}
-    <h3>Room for something good.</h3>
-    <p>Your bag is empty. Their next adventure is waiting.</p>
-    <a class="pill-button dark-button" href="#shop" data-cart-close>Meet the platform {% render 'icon', name: 'arrow-right', size: 17 %}</a>
+    <h3>Nothing in your bag yet.</h3>
+    <p>One product, one job: a flat bed for the back seat.</p>
+    <a class="pill-button dark-button" href="#shop" data-cart-close>Shop RoadNest {% render 'icon', name: 'arrow-right', size: 17 %}</a>
   </div>
 {%- endif -%}

@@ -2,7 +2,7 @@
   <div class="drawer-backdrop" data-nav-close></div>
   <div class="navigation-sheet" role="dialog" aria-modal="true" aria-label="Navigation">
     <h2 class="wordmark sheet-title">{{ shop.name | default: 'RoadNest' }}</h2>
-    <p class="sheet-description">For your favourite passenger.</p>
+    <p class="sheet-description">One flat bed for the back seat.</p>
     <nav aria-label="Mobile navigation">
       {%- for link in menu.links -%}
         <a href="{{ link.url }}" data-nav-close>{{ link.title }}{% render 'icon', name: 'arrow-up-right' %}</a>
