@@ -16,3 +16,8 @@ details.accordion-item{border-bottom:1px solid var(--border)}details.accordion-i
 
 footer .brand-dot,.navigation-sheet .brand-dot{color:#c9bfa9}
 .design-story .scene-unavailable{color:#a29a8e}
+.wordmark{gap:11px}
+.wordmark-mark{width:38px;height:38px;flex:0 0 auto;align-self:center}
+.wordmark-text{display:inline-flex;align-items:flex-start}
+@media(max-width:800px){.wordmark{gap:9px}.wordmark-mark{width:32px;height:32px}}
+@media(max-width:450px){.wordmark-mark{width:29px;height:29px}}

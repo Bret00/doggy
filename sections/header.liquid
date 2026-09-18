@@ -1,5 +1,10 @@
 <header class="site-header">
-  <a class="wordmark" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">{{ section.settings.logo_text }}<span class="brand-dot">.</span></a>
+  <a class="wordmark" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+    {%- if section.settings.show_logo_mark -%}
+      <img class="wordmark-mark" src="{{ 'roadnest-mark.svg' | asset_url }}" alt="" width="38" height="38" loading="eager">
+    {%- endif -%}
+    <span class="wordmark-text">{{ section.settings.logo_text }}<span class="brand-dot">.</span></span>
+  </a>
 
   <nav class="desktop-nav" aria-label="Main navigation">
     {%- for link in section.settings.main_menu.links -%}
@@ -30,6 +35,12 @@
       "id": "logo_text",
       "label": "Logo text",
       "default": "RoadNest"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo_mark",
+      "label": "Show logo mark beside the name",
+      "default": true
     },
     {
       "type": "link_list",
