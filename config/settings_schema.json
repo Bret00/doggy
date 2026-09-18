@@ -10,10 +10,30 @@
   {
     "name": "Colours",
     "settings": [
-      { "type": "color", "id": "color_page", "label": "Page background (warm ivory)", "default": "#f4efe6" },
-      { "type": "color", "id": "color_ink", "label": "Text / headings", "default": "#1e1e1e" },
-      { "type": "color", "id": "color_accent", "label": "Brand green (bars, buttons, accents)", "default": "#3f5147" },
-      { "type": "color", "id": "color_accent_text", "label": "Text on brand green", "default": "#f4efe6" }
+      {
+        "type": "color",
+        "id": "color_page",
+        "label": "Page background (cream)",
+        "default": "#f4ede1"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Text / headings",
+        "default": "#3b322a"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Brand accent (bars, buttons)",
+        "default": "#6b5744"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_text",
+        "label": "Text on brand green",
+        "default": "#f4ede1"
+      }
     ]
   }
 ]

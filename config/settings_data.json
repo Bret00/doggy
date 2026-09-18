@@ -9,10 +9,10 @@
  */
 {
   "current": {
-    "color_page": "#f4efe6",
-    "color_ink": "#1e1e1e",
-    "color_accent": "#3f5147",
-    "color_accent_text": "#f4efe6",
+    "color_page": "#f4ede1",
+    "color_ink": "#3b322a",
+    "color_accent": "#6b5744",
+    "color_accent_text": "#f4ede1",
     "blocks": {
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
