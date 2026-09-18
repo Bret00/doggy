@@ -1,18 +1,19 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Good Miles",
-    "theme_version": "1.0.0",
-    "theme_author": "Good Miles",
+    "theme_name": "RoadNest",
+    "theme_version": "1.1.0",
+    "theme_author": "RoadNest",
     "theme_documentation_url": "https://shopify.dev",
     "theme_support_url": "https://shopify.dev"
   },
   {
     "name": "Colours",
     "settings": [
-      { "type": "color", "id": "color_page", "label": "Page background", "default": "#f8f9f5" },
-      { "type": "color", "id": "color_ink", "label": "Text / dark", "default": "#20251e" },
-      { "type": "color", "id": "color_accent", "label": "Accent (orange)", "default": "#ff6634" }
+      { "type": "color", "id": "color_page", "label": "Page background (warm ivory)", "default": "#f4efe6" },
+      { "type": "color", "id": "color_ink", "label": "Text / headings", "default": "#1e1e1e" },
+      { "type": "color", "id": "color_accent", "label": "Brand green (bars, buttons, accents)", "default": "#3f5147" },
+      { "type": "color", "id": "color_accent_text", "label": "Text on brand green", "default": "#f4efe6" }
     ]
   }
 ]

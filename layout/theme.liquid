@@ -20,14 +20,15 @@
 
   {{ 'body.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
   {{ 'display.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
-  {{ 'good-miles.css' | asset_url | stylesheet_tag }}
+  {{ 'roadnest.css' | asset_url | stylesheet_tag }}
   <style>
     :root{
       --page: {{ settings.color_page }};
       --background: {{ settings.color_page }};
       --ink: {{ settings.color_ink }};
       --foreground: {{ settings.color_ink }};
-      --orange: {{ settings.color_accent }};
+      --brand: {{ settings.color_accent }};
+      --on-brand: {{ settings.color_accent_text }};
       --accent: {{ settings.color_accent }};
       --ring: {{ settings.color_accent }};
     }
@@ -47,7 +48,7 @@
 
   <span class="sr-only" role="status" data-cart-announce></span>
 
-  <script src="{{ 'good-miles.js' | asset_url }}" defer></script>
+  <script src="{{ 'roadnest.js' | asset_url }}" defer></script>
   <script type="module" src="{{ 'product-scene.js' | asset_url }}"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 {%- comment -%} mode: 'hero' or 'story'. fallback_image: product image object or asset url string. {%- endcomment -%}
 <div class="product-scene{% if mode == 'hero' %} interactive-scene{% endif %}" data-product-scene data-mode="{{ mode }}">
   {%- if fallback_image and fallback_image != blank and fallback_image.src -%}
-    <img class="scene-fallback" src="{{ fallback_image | image_url: width: 1200 }}" alt="{{ fallback_image.alt | default: 'Black hard-bottom dog backseat extender' | escape }}" width="{{ fallback_image.width | default: 1000 }}" height="{{ fallback_image.height | default: 1000 }}" loading="{% if mode == 'hero' %}eager{% else %}lazy{% endif %}">
+    <img class="scene-fallback" src="{{ fallback_image | image_url: width: 1200 }}" alt="{{ fallback_image.alt | default: 'Black hard-bottom dog car platform' | escape }}" width="{{ fallback_image.width | default: 1000 }}" height="{{ fallback_image.height | default: 1000 }}" loading="{% if mode == 'hero' %}eager{% else %}lazy{% endif %}">
   {%- else -%}
-    <img class="scene-fallback" src="{{ 'product.webp' | asset_url }}" alt="Black hard-bottom dog backseat extender" width="1000" height="1000" loading="{% if mode == 'hero' %}eager{% else %}lazy{% endif %}">
+    <img class="scene-fallback" src="{{ 'product.webp' | asset_url }}" alt="Black hard-bottom dog car platform" width="1000" height="1000" loading="{% if mode == 'hero' %}eager{% else %}lazy{% endif %}">
   {%- endif -%}
   <span class="scene-unavailable" hidden>Product photo &middot; 3D view unavailable on this device</span>
 </div>

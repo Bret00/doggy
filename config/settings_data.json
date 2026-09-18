@@ -1,7 +1,8 @@
 {
   "current": {
-    "color_page": "#f8f9f5",
-    "color_ink": "#20251e",
-    "color_accent": "#ff6634"
+    "color_page": "#f4efe6",
+    "color_ink": "#1e1e1e",
+    "color_accent": "#3f5147",
+    "color_accent_text": "#f4efe6"
   }
 }

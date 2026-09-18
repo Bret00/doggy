@@ -2,14 +2,14 @@
   {%- if section.settings.image -%}
     <img src="{{ section.settings.image | image_url: width: 1800 }}" alt="{{ section.settings.image.alt | default: section.settings.heading_line1 | escape }}" class="lifestyle-photo" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy">
   {%- else -%}
-    <img src="{{ 'lifestyle.webp' | asset_url }}" alt="A dog enjoying the extra room of the backseat extender inside a car" class="lifestyle-photo" width="1600" height="1067" loading="lazy">
+    <img src="{{ 'lifestyle.webp' | asset_url }}" alt="A dog enjoying the extra room of the flat-bed platform inside a car" class="lifestyle-photo" width="1600" height="1067" loading="lazy">
   {%- endif -%}
   <div class="lifestyle-shade"></div>
   <div class="lifestyle-copy" data-reveal>
     <span class="eyebrow">{{ section.settings.eyebrow }}</span>
     <h2>{{ section.settings.heading_line1 }}<br>{{ section.settings.heading_line2 }}</h2>
     <p>{{ section.settings.body }}</p>
-    <a class="pill-button orange-button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_text }} {% render 'icon', name: 'arrow-up-right', size: 18 %}</a>
+    <a class="pill-button accent-button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_text }} {% render 'icon', name: 'arrow-up-right', size: 18 %}</a>
   </div>
   <span class="lifestyle-bottom">{{ section.settings.bottom_text }}</span>
 </section>
