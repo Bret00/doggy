@@ -1,6 +1,12 @@
 <footer>
   <div class="footer-top">
-    <a class="wordmark" href="{{ routes.root_url }}">{{ section.settings.logo_text }}<span class="brand-dot">.</span></a>
+    <a class="wordmark" href="{{ routes.root_url }}">
+      {%- if section.settings.show_logo_mark -%}
+        {%- comment -%} ivory variant: the footer sits on the deep green panel {%- endcomment -%}
+        <img class="wordmark-mark" src="{{ 'roadnest-mark-dark.svg' | asset_url }}" alt="" width="46" height="46" loading="lazy">
+      {%- endif -%}
+      <span class="wordmark-text">{{ section.settings.logo_text }}<span class="brand-dot">.</span></span>
+    </a>
     <span>{{ section.settings.tagline }}</span>
     <a href="{{ section.settings.shop_link }}">{{ section.settings.shop_link_text }} {% render 'icon', name: 'arrow-up-right', size: 17 %}</a>
   </div>
@@ -22,6 +28,12 @@
       "id": "logo_text",
       "label": "Logo text",
       "default": "RoadNest"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo_mark",
+      "label": "Show logo mark beside the name",
+      "default": true
     },
     {
       "type": "text",

@@ -21,3 +21,5 @@ footer .brand-dot,.navigation-sheet .brand-dot{color:#c9bfa9}
 .wordmark-text{display:inline-flex;align-items:flex-start}
 @media(max-width:800px){.wordmark{gap:9px}.wordmark-mark{width:32px;height:32px}}
 @media(max-width:450px){.wordmark-mark{width:29px;height:29px}}
+.footer-top .wordmark{gap:14px}.footer-top .wordmark-mark{width:46px;height:46px}
+@media(max-width:800px){.footer-top .wordmark{gap:11px}.footer-top .wordmark-mark{width:40px;height:40px}}
