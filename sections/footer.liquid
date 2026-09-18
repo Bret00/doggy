@@ -10,6 +10,17 @@
     <span>{{ section.settings.tagline }}</span>
     <a href="{{ section.settings.shop_link }}">{{ section.settings.shop_link_text }} {% render 'icon', name: 'arrow-up-right', size: 17 %}</a>
   </div>
+  {%- if section.settings.footer_menu.links.size > 0 -%}
+    {%- comment -%}
+      Without these the support pages (FAQ, Fit Guide, Shipping, Returns...) are
+      unreachable from the storefront.
+    {%- endcomment -%}
+    <nav class="footer-links" aria-label="Footer">
+      {%- for link in section.settings.footer_menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
   <div class="footer-bottom">
     <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}.</span>
     {%- if section.settings.disclaimer != blank -%}<span>{{ section.settings.disclaimer }}</span>{%- endif -%}
@@ -52,6 +63,12 @@
       "id": "shop_link_text",
       "label": "\"Shop\" link text",
       "default": "Shop the platform"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer menu (support pages)",
+      "default": "footer"
     },
     {
       "type": "text",

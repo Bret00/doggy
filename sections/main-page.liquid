@@ -1,0 +1,37 @@
+<article class="page">
+  <header class="page-header">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h1>{{ page.title }}</h1>
+    <div class="page-rule" aria-hidden="true"></div>
+  </header>
+
+  <div class="page-body rte">
+    {{ page.content }}
+  </div>
+
+  {%- if section.settings.show_cta -%}
+    <aside class="page-cta">
+      <span class="eyebrow">{{ section.settings.cta_eyebrow }}</span>
+      <h2>{{ section.settings.cta_heading }}</h2>
+      <a class="pill-button dark-button" href="{{ section.settings.cta_link }}">
+        {{ section.settings.cta_text }} {% render 'icon', name: 'arrow-up-right', size: 18 %}
+      </a>
+    </aside>
+  {%- endif -%}
+</article>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow above the title", "default": "ROADNEST" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show the call to action at the bottom", "default": true },
+    { "type": "text", "id": "cta_eyebrow", "label": "CTA eyebrow", "default": "STILL DECIDING?" },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "One flat bed for the back seat." },
+    { "type": "text", "id": "cta_text", "label": "CTA button text", "default": "Shop RoadNest" },
+    { "type": "text", "id": "cta_link", "label": "CTA button link", "default": "/products/the-roadnest-back-seat-hammock" }
+  ]
+}
+{% endschema %}

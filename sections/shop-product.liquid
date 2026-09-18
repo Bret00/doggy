@@ -108,6 +108,13 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
+
+      {%- comment -%} app blocks, e.g. the Judge.me review widget {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          <div class="product-app-block" {{ block.shopify_attributes }}>{% render block %}</div>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   {%- endif -%}
 </section>
@@ -186,6 +193,9 @@
           "label": "Content"
         }
       ]
+    },
+    {
+      "type": "@app"
     }
   ],
   "presets": [
