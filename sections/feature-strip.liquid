@@ -12,26 +12,51 @@
       "type": "feature",
       "name": "Feature",
       "settings": [
-        { "type": "select", "id": "icon", "label": "Icon", "default": "layers-3", "options": [
-          { "value": "layers-3", "label": "Layers" },
-          { "value": "droplets", "label": "Droplets" },
-          { "value": "maximize-2", "label": "Maximize" },
-          { "value": "wind", "label": "Wind" },
-          { "value": "check", "label": "Check" },
-          { "value": "paw-print", "label": "Paw print" }
-        ] },
-        { "type": "text", "id": "label", "label": "Label", "default": "Feature" }
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "layers-3",
+          "options": [
+            {
+              "value": "layers-3",
+              "label": "Layers"
+            },
+            {
+              "value": "droplets",
+              "label": "Droplets"
+            },
+            {
+              "value": "maximize-2",
+              "label": "Maximize"
+            },
+            {
+              "value": "wind",
+              "label": "Wind"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "paw-print",
+              "label": "Paw print"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Feature"
+        }
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      { "type": "feature", "settings": { "icon": "layers-3", "label": "Fills the footwell" } },
-      { "type": "feature", "settings": { "icon": "droplets", "label": "Genuinely waterproof" } },
-      { "type": "feature", "settings": { "icon": "maximize-2", "label": "One flat surface" } },
-      { "type": "feature", "settings": { "icon": "wind", "label": "Mesh side windows" } }
-    ]
-  },
-  "presets": [{ "name": "Feature strip" }]
+  "presets": [
+    {
+      "name": "Feature strip"
+    }
+  ]
 }
 {% endschema %}

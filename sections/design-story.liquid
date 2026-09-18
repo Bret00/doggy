@@ -35,39 +35,102 @@
 {
   "name": "Design story",
   "settings": [
-    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "design" },
-    { "type": "product", "id": "product", "label": "Product (for 3D view fallback image)" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BUILT AROUND YOUR DOG’S BODY" }
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "design"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (for 3D view fallback image)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "BUILT AROUND YOUR DOG’S BODY"
+    }
   ],
   "blocks": [
     {
       "type": "chapter",
       "name": "Chapter",
       "settings": [
-        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Flat, not a slope" },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FILLS THE FOOTWELL" },
-        { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Flat," },
-        { "type": "text", "id": "heading_line2", "label": "Heading line 2 (accent)", "default": "not a slope." },
-        { "type": "textarea", "id": "body", "label": "Body", "default": "Fills the footwell so your dog lies down properly instead of bracing against a gap." },
-        { "type": "text", "id": "detail_text", "label": "Detail text", "default": "Wall to wall, door to door" },
-        { "type": "select", "id": "icon", "label": "Icon", "default": "maximize-2", "options": [
-          { "value": "maximize-2", "label": "Maximize" },
-          { "value": "layers-3", "label": "Layers" },
-          { "value": "droplets", "label": "Droplets" },
-          { "value": "wind", "label": "Wind" }
-        ] },
-        { "type": "text", "id": "caption", "label": "3D view caption", "default": "ONE LEVEL SURFACE" }
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "default": "Flat, not a slope"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "FILLS THE FOOTWELL"
+        },
+        {
+          "type": "text",
+          "id": "heading_line1",
+          "label": "Heading line 1",
+          "default": "Flat,"
+        },
+        {
+          "type": "text",
+          "id": "heading_line2",
+          "label": "Heading line 2 (accent)",
+          "default": "not a slope."
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body",
+          "default": "Fills the footwell so your dog lies down properly instead of bracing against a gap."
+        },
+        {
+          "type": "text",
+          "id": "detail_text",
+          "label": "Detail text",
+          "default": "Wall to wall, door to door"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "maximize-2",
+          "options": [
+            {
+              "value": "maximize-2",
+              "label": "Maximize"
+            },
+            {
+              "value": "layers-3",
+              "label": "Layers"
+            },
+            {
+              "value": "droplets",
+              "label": "Droplets"
+            },
+            {
+              "value": "wind",
+              "label": "Wind"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "3D view caption",
+          "default": "ONE LEVEL SURFACE"
+        }
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      { "type": "chapter", "settings": { "tab_label": "Flat, not a slope", "eyebrow": "FILLS THE FOOTWELL", "heading_line1": "Flat,", "heading_line2": "not a slope.", "body": "Fills the footwell so your dog lies down properly instead of bracing against a gap. Easier on hips and joints.", "detail_text": "Wall to wall, door to door", "icon": "maximize-2", "caption": "ONE LEVEL SURFACE" } },
-      { "type": "chapter", "settings": { "tab_label": "No footwell drop", "eyebrow": "WHEN YOU BRAKE HARD", "heading_line1": "No drop", "heading_line2": "behind your seat.", "body": "On hard braking your dog stays on the platform instead of being wedged into the footwell.", "detail_text": "Better for seniors and big breeds", "icon": "layers-3", "caption": "HOW IT IS BUILT" } },
-      { "type": "chapter", "settings": { "tab_label": "Waterproof", "eyebrow": "WET DOG, SLUSH, MUD", "heading_line1": "Genuinely", "heading_line2": "waterproof.", "body": "A bonded inner layer, not a spray coating that wears off. Wet dog and slush stay on top.", "detail_text": "Bonded inner layer", "icon": "droplets", "caption": "WHAT IT KEEPS OUT" } },
-      { "type": "chapter", "settings": { "tab_label": "Clean in 2 min", "eyebrow": "CLEANING IT", "heading_line1": "Unclip, shake,", "heading_line2": "wipe, done.", "body": "Wipe it or hose it down and let it air dry. Machine washable cold when it needs a proper clean.", "detail_text": "Machine washable cold", "icon": "wind", "caption": "MESH SIDE WINDOWS" } }
-    ]
-  },
-  "presets": [{ "name": "Design story" }]
+  "presets": [
+    {
+      "name": "Design story"
+    }
+  ]
 }
 {% endschema %}

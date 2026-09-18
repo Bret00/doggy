@@ -116,39 +116,82 @@
 {
   "name": "Shop product",
   "settings": [
-    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "shop" },
-    { "type": "product", "id": "product", "label": "Product" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE ROADNEST PLATFORM" },
-    { "type": "text", "id": "gallery_tag", "label": "Gallery tag", "default": "ONE FLAT BED FOR THE BACK SEAT" },
-    { "type": "textarea", "id": "summary", "label": "Summary (blank = use product description)" },
-    { "type": "text", "id": "variant_label", "label": "Single-variant label", "default": "Colour — Black" },
-    { "type": "text", "id": "reassurance_note", "label": "Reassurance note", "default": "Ships within 2 business days. Delivery 1–2 weeks across Canada and the US, with tracking. 30-day money-back guarantee." }
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "shop"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE ROADNEST PLATFORM"
+    },
+    {
+      "type": "text",
+      "id": "gallery_tag",
+      "label": "Gallery tag",
+      "default": "ONE FLAT BED FOR THE BACK SEAT"
+    },
+    {
+      "type": "textarea",
+      "id": "summary",
+      "label": "Summary (blank = use product description)"
+    },
+    {
+      "type": "text",
+      "id": "variant_label",
+      "label": "Single-variant label",
+      "default": "Colour — Black"
+    },
+    {
+      "type": "text",
+      "id": "reassurance_note",
+      "label": "Reassurance note",
+      "default": "Ships within 2 business days. Delivery 1–2 weeks across Canada and the US, with tracking. 30-day money-back guarantee."
+    }
   ],
   "blocks": [
     {
       "type": "inclusion",
       "name": "Inclusion bullet",
-      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Fills the footwell" }]
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Fills the footwell"
+        }
+      ]
     },
     {
       "type": "accordion_item",
       "name": "Accordion item",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "What it covers" },
-        { "type": "richtext", "id": "content", "label": "Content" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "What it covers"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      { "type": "inclusion", "settings": { "text": "Fills the footwell" } },
-      { "type": "inclusion", "settings": { "text": "Waterproof bonded layer" } },
-      { "type": "inclusion", "settings": { "text": "Mesh side windows" } },
-      { "type": "inclusion", "settings": { "text": "Machine washable cold" } },
-      { "type": "accordion_item", "settings": { "title": "What it covers", "content": "<p>Fills the footwell so the back seat becomes one flat surface, then covers the seat backs, both inner doors, and the floor. Nothing gets through to your interior.</p>" } },
-      { "type": "accordion_item", "settings": { "title": "Fit", "content": "<p>Fits most SUVs, trucks with a back bench, and larger crossovers and wagons. Standard sedans work with a shorter platform section. Not for compact two-doors. Email us your year, make and model if you are unsure.</p>" } }
-    ]
-  },
-  "presets": [{ "name": "Shop product" }]
+  "presets": [
+    {
+      "name": "Shop product"
+    }
+  ]
 }
 {% endschema %}

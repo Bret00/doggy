@@ -1,17 +1,272 @@
 {
   "sections": {
-    "hero": { "type": "hero" },
-    "feature-strip": { "type": "feature-strip" },
+    "hero": {
+      "type": "hero"
+    },
+    "feature-strip": {
+      "type": "feature-strip",
+      "blocks": {
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "icon": "layers-3",
+            "label": "Fills the footwell"
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "icon": "droplets",
+            "label": "Genuinely waterproof"
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "icon": "maximize-2",
+            "label": "One flat surface"
+          }
+        },
+        "feature-4": {
+          "type": "feature",
+          "settings": {
+            "icon": "wind",
+            "label": "Mesh side windows"
+          }
+        }
+      },
+      "block_order": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4"
+      ]
+    },
     "intro": {
       "type": "intro",
-      "settings": { "anchor_id": "" }
+      "settings": {
+        "anchor_id": ""
+      }
     },
-    "design-story": { "type": "design-story" },
-    "lifestyle": { "type": "lifestyle" },
-    "details": { "type": "details" },
-    "shop-product": { "type": "shop-product" },
-    "faq": { "type": "faq" },
-    "closing-banner": { "type": "closing-banner" }
+    "design-story": {
+      "type": "design-story",
+      "blocks": {
+        "chapter-1": {
+          "type": "chapter",
+          "settings": {
+            "tab_label": "Flat, not a slope",
+            "eyebrow": "FILLS THE FOOTWELL",
+            "heading_line1": "Flat,",
+            "heading_line2": "not a slope.",
+            "body": "Fills the footwell so your dog lies down properly instead of bracing against a gap. Easier on hips and joints.",
+            "detail_text": "Wall to wall, door to door",
+            "icon": "maximize-2",
+            "caption": "ONE LEVEL SURFACE"
+          }
+        },
+        "chapter-2": {
+          "type": "chapter",
+          "settings": {
+            "tab_label": "No footwell drop",
+            "eyebrow": "WHEN YOU BRAKE HARD",
+            "heading_line1": "No drop",
+            "heading_line2": "behind your seat.",
+            "body": "On hard braking your dog stays on the platform instead of being wedged into the footwell.",
+            "detail_text": "Better for seniors and big breeds",
+            "icon": "layers-3",
+            "caption": "HOW IT IS BUILT"
+          }
+        },
+        "chapter-3": {
+          "type": "chapter",
+          "settings": {
+            "tab_label": "Waterproof",
+            "eyebrow": "WET DOG, SLUSH, MUD",
+            "heading_line1": "Genuinely",
+            "heading_line2": "waterproof.",
+            "body": "A bonded inner layer, not a spray coating that wears off. Wet dog and slush stay on top.",
+            "detail_text": "Bonded inner layer",
+            "icon": "droplets",
+            "caption": "WHAT IT KEEPS OUT"
+          }
+        },
+        "chapter-4": {
+          "type": "chapter",
+          "settings": {
+            "tab_label": "Clean in 2 min",
+            "eyebrow": "CLEANING IT",
+            "heading_line1": "Unclip, shake,",
+            "heading_line2": "wipe, done.",
+            "body": "Wipe it or hose it down and let it air dry. Machine washable cold when it needs a proper clean.",
+            "detail_text": "Machine washable cold",
+            "icon": "wind",
+            "caption": "MESH SIDE WINDOWS"
+          }
+        }
+      },
+      "block_order": [
+        "chapter-1",
+        "chapter-2",
+        "chapter-3",
+        "chapter-4"
+      ]
+    },
+    "lifestyle": {
+      "type": "lifestyle"
+    },
+    "details": {
+      "type": "details",
+      "blocks": {
+        "detail-1": {
+          "type": "detail",
+          "settings": {
+            "title": "Will it fit your car?",
+            "text": "Fits most SUVs, trucks with a back bench, and larger crossovers and wagons. Standard sedans work with a shorter platform section. Not for compact two-doors.",
+            "icon": "layers-3"
+          }
+        },
+        "detail-2": {
+          "type": "detail",
+          "settings": {
+            "title": "Your dog won’t feel boxed in.",
+            "text": "Mesh side windows keep it open — your dog sees out and gets airflow, and you can see your dog.",
+            "icon": "droplets"
+          }
+        },
+        "detail-3": {
+          "type": "detail",
+          "settings": {
+            "title": "Shipping takes 1–2 weeks.",
+            "text": "Most orders ship within 2 business days. Delivery is usually 1–2 weeks across Canada and the US, with tracking.",
+            "icon": "maximize-2"
+          }
+        }
+      },
+      "block_order": [
+        "detail-1",
+        "detail-2",
+        "detail-3"
+      ]
+    },
+    "shop-product": {
+      "type": "shop-product",
+      "blocks": {
+        "inclusion-1": {
+          "type": "inclusion",
+          "settings": {
+            "text": "Fills the footwell"
+          }
+        },
+        "inclusion-2": {
+          "type": "inclusion",
+          "settings": {
+            "text": "Waterproof bonded layer"
+          }
+        },
+        "inclusion-3": {
+          "type": "inclusion",
+          "settings": {
+            "text": "Mesh side windows"
+          }
+        },
+        "inclusion-4": {
+          "type": "inclusion",
+          "settings": {
+            "text": "Machine washable cold"
+          }
+        },
+        "accordion_item-5": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What it covers",
+            "content": "<p>Fills the footwell so the back seat becomes one flat surface, then covers the seat backs, both inner doors, and the floor. Nothing gets through to your interior.</p>"
+          }
+        },
+        "accordion_item-6": {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Fit",
+            "content": "<p>Fits most SUVs, trucks with a back bench, and larger crossovers and wagons. Standard sedans work with a shorter platform section. Not for compact two-doors. Email us your year, make and model if you are unsure.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "inclusion-1",
+        "inclusion-2",
+        "inclusion-3",
+        "inclusion-4",
+        "accordion_item-5",
+        "accordion_item-6"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "Will it fit my car?",
+            "answer": "<p>Fits most SUVs, trucks with a back bench, and larger crossovers and wagons. Standard sedans work with a shorter platform section. Not for compact two-doors. Email us your year, make and model if you are unsure.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "Will my dog feel boxed in?",
+            "answer": "<p>No. Mesh side windows keep it open — your dog sees out and gets airflow, and you can see your dog.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I clean it?",
+            "answer": "<p>Unclip it, shake it out, then wipe or hose it down and let it air dry. Machine washable cold when it needs a proper clean.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "How long is shipping?",
+            "answer": "<p>Most orders ship within 2 business days. Delivery is usually 1–2 weeks across Canada and the US, with tracking.</p>"
+          }
+        },
+        "faq-5": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it a crash restraint?",
+            "answer": "<p>No. It protects your seats and gives your dog a flat surface to lie on. It is not crash-tested. Use a proper harness or crate if you want crash protection.</p>"
+          }
+        },
+        "faq-6": {
+          "type": "faq",
+          "settings": {
+            "question": "What if it doesn’t work out?",
+            "answer": "<p>Send it back within 30 days of delivery for a full refund. It can show honest use, but it needs to be clean and dry.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-5",
+        "faq-6"
+      ]
+    },
+    "closing-banner": {
+      "type": "closing-banner"
+    }
   },
-  "order": ["hero", "feature-strip", "intro", "design-story", "lifestyle", "details", "shop-product", "faq", "closing-banner"]
+  "order": [
+    "hero",
+    "feature-strip",
+    "intro",
+    "design-story",
+    "lifestyle",
+    "details",
+    "shop-product",
+    "faq",
+    "closing-banner"
+  ]
 }
