@@ -1,7 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
-      "type": "hero"
+      "type": "hero",
+      "settings": {
+        "product": "",
+        "eyebrow": "THE FLAT-BED DOG PLATFORM",
+        "heading_line1": "One flat bed",
+        "heading_line2": "for the back seat.",
+        "subtext": "A platform that fills the footwell, so your dog rides on one level surface — no sliding, no drop behind your seat.",
+        "cta_text": "Shop RoadNest",
+        "cta_link": "#shop",
+        "secondary_text": "See how it works",
+        "secondary_link": "#design",
+        "note_text": "Waterproof. Wipes clean in two minutes.",
+        "product_index": "NO. 01 / THE FLAT-BED PLATFORM",
+        "floating_label": "FILLS THE FOOTWELL · NO SLIDING",
+        "side_label": "ONE LEVEL SURFACE.",
+        "bottom_line1": "FITS MOST SUVS AND TRUCKS.",
+        "bottom_line2": "30-DAY GUARANTEE."
+      }
     },
     "feature-strip": {
       "type": "feature-strip",
@@ -40,12 +66,17 @@
         "feature-2",
         "feature-3",
         "feature-4"
-      ]
+      ],
+      "settings": {}
     },
     "intro": {
       "type": "intro",
       "settings": {
-        "anchor_id": ""
+        "anchor_id": "",
+        "eyebrow": "BUILT AROUND YOUR DOG'S BODY",
+        "heading_line1": "A normal cover just drapes over the bench.",
+        "heading_line2": "Your dog still slides into the footwell.",
+        "body": "RoadNest drops a padded panel into that gap and turns the whole back seat into one flat bed."
       }
     },
     "design-story": {
@@ -109,10 +140,25 @@
         "chapter-2",
         "chapter-3",
         "chapter-4"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "design",
+        "product": "",
+        "eyebrow": "BUILT AROUND YOUR DOG’S BODY"
+      }
     },
     "lifestyle": {
-      "type": "lifestyle"
+      "type": "lifestyle",
+      "settings": {
+        "anchor_id": "life",
+        "eyebrow": "IT COVERS MORE THAN THE BENCH",
+        "heading_line1": "Nothing gets through",
+        "heading_line2": "to your interior.",
+        "body": "Covers the seat backs, both inner doors, and the floor — not just the bench.",
+        "cta_text": "Shop RoadNest",
+        "cta_link": "#shop",
+        "bottom_text": "FITS MOST SUVS, TRUCKS AND WAGONS."
+      }
     },
     "details": {
       "type": "details",
@@ -146,7 +192,12 @@
         "detail-1",
         "detail-2",
         "detail-3"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "WHAT YOU SHOULD KNOW",
+        "heading_line1": "Before you",
+        "heading_line2": "order."
+      }
     },
     "shop-product": {
       "type": "shop-product",
@@ -197,7 +248,16 @@
         "inclusion-4",
         "accordion_item-5",
         "accordion_item-6"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "shop",
+        "product": "the-roadnest-back-seat-hammock",
+        "eyebrow": "THE ROADNEST PLATFORM",
+        "gallery_tag": "ONE FLAT BED FOR THE BACK SEAT",
+        "summary": "",
+        "variant_label": "Colour — Black",
+        "reassurance_note": "Ships within 2 business days. Delivery 1–2 weeks across Canada and the US, with tracking. 30-day money-back guarantee."
+      }
     },
     "faq": {
       "type": "faq",
@@ -252,10 +312,21 @@
         "faq-4",
         "faq-5",
         "faq-6"
-      ]
+      ],
+      "settings": {
+        "anchor_id": "questions",
+        "eyebrow": "COMMON QUESTIONS",
+        "heading": "Common questions.",
+        "subtext": "The things people ask before ordering."
+      }
     },
     "closing-banner": {
-      "type": "closing-banner"
+      "type": "closing-banner",
+      "settings": {
+        "eyebrow": "30-DAY MONEY-BACK GUARANTEE",
+        "text": "Try it for a month.",
+        "link": "#shop"
+      }
     }
   },
   "order": [

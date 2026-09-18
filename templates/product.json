@@ -1,10 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "shop-product": {
       "type": "shop-product",
-      "settings": {
-        "anchor_id": ""
-      },
       "blocks": {
         "inclusion-1": {
           "type": "inclusion",
@@ -52,7 +58,10 @@
         "inclusion-4",
         "accordion_item-5",
         "accordion_item-6"
-      ]
+      ],
+      "settings": {
+        "anchor_id": ""
+      }
     },
     "feature-strip": {
       "type": "feature-strip",
@@ -91,7 +100,8 @@
         "feature-2",
         "feature-3",
         "feature-4"
-      ]
+      ],
+      "settings": {}
     },
     "faq": {
       "type": "faq",
@@ -146,7 +156,8 @@
         "faq-4",
         "faq-5",
         "faq-6"
-      ]
+      ],
+      "settings": {}
     }
   },
   "order": [
