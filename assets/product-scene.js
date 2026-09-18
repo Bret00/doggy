@@ -18,7 +18,9 @@ function mountScene(container, mode) {
   renderer.setClearColor(0, 0);
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.5;
+  // Exposure was tuned when every material was near-black. With lighter panels and
+  // light-furred dogs it clipped them to white, so the whole rig is pulled back.
+  renderer.toneMappingExposure = 1.02;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = T.PCFSoftShadowMap;
   const canvas = renderer.domElement;
@@ -26,8 +28,8 @@ function mountScene(container, mode) {
   canvas.setAttribute(
     "aria-label",
     mode === "hero"
-      ? "3D illustration of the black dog backseat extender. Drag horizontally or use the left and right arrow keys to rotate. Press Home to reset."
-      : "Scroll-controlled 3D illustration of the dog backseat extender"
+      ? "3D illustration of the RoadNest flat-bed dog car platform, with two dogs lying on it. Drag horizontally or use the left and right arrow keys to rotate. Press Home to reset."
+      : "Scroll-controlled 3D illustration of the RoadNest flat-bed dog car platform"
   );
   if (mode === "hero") canvas.tabIndex = 0;
   container.appendChild(canvas);
@@ -43,8 +45,8 @@ function mountScene(container, mode) {
   scene.environmentIntensity = 0.85;
   room.dispose();
 
-  scene.add(new T.AmbientLight(0xffffff, 0.6));
-  const key = new T.DirectionalLight(0xfff4e5, 5);
+  scene.add(new T.AmbientLight(0xffffff, 0.5));
+  const key = new T.DirectionalLight(0xfff4e5, 3.3);
   key.position.set(2.5, 8, 6);
   key.castShadow = true;
   key.shadow.mapSize.set(1024, 1024);
@@ -56,10 +58,10 @@ function mountScene(container, mode) {
   key.shadow.bias = -0.0003;
   key.shadow.radius = 4;
   scene.add(key);
-  const fill = new T.DirectionalLight(0xe7edff, 2.5);
+  const fill = new T.DirectionalLight(0xe7edff, 1.75);
   fill.position.set(-5, 3, 2);
   scene.add(fill);
-  const rim = new T.DirectionalLight(0xffc5a3, 3.6);
+  const rim = new T.DirectionalLight(0xffc5a3, 2.3);
   rim.position.set(0, 4, -4);
   scene.add(rim);
 
@@ -127,14 +129,21 @@ function mountScene(container, mode) {
   meshMap.repeat.set(4, 4);
   meshMap.colorSpace = T.SRGBColorSpace;
 
-  const leather = new T.MeshStandardMaterial({ color: 0x282925, roughness: 0.64, metalness: 0.03, bumpMap: grain, bumpScale: 0.018 });
-  const darkLeather = new T.MeshStandardMaterial({ color: 0x131714, roughness: 0.82, bumpMap: grain, bumpScale: 0.025 });
-  const band = new T.MeshStandardMaterial({ color: 0x151915, roughness: 0.88, bumpMap: woven, bumpScale: 0.015 });
-  const tan = new T.MeshStandardMaterial({ color: 0xc79472, roughness: 0.69, bumpMap: grain, bumpScale: 0.008 });
-  const blackMetal = new T.MeshStandardMaterial({ color: 0x242924, roughness: 0.33, metalness: 0.65 });
-  const thread = new T.MeshStandardMaterial({ color: 0x4b4d42, roughness: 0.85 });
-  const silver = new T.MeshStandardMaterial({ color: 0x999c99, metalness: 0.95, roughness: 0.22 });
-  const boardMaterial = new T.MeshStandardMaterial({ color: 0x8e7c63, roughness: 0.98 });
+  // Everything used to sit within a few shades of black, which read as one dark mass on the
+  // ivory page. Panels are separated by tone now, and the trim carries the brand green.
+  const leather = new T.MeshStandardMaterial({ color: 0x43413c, roughness: 0.64, metalness: 0.03, bumpMap: grain, bumpScale: 0.018 });
+  const darkLeather = new T.MeshStandardMaterial({ color: 0x2b2a27, roughness: 0.82, bumpMap: grain, bumpScale: 0.025 });
+  // `band` is every strap, rail and piping on the model — brand green here floods the whole
+  // product and it reads as a green cage. Keep it a dark webbing; green stays an accent.
+  const band = new T.MeshStandardMaterial({ color: 0x35372f, roughness: 0.86, bumpMap: woven, bumpScale: 0.015 });
+  // The sleeping surface is a shade warmer than the walls so the bed reads as a bed
+  // rather than the inside of one uniform box.
+  const padMaterial = new T.MeshStandardMaterial({ color: 0x554f47, roughness: 0.7, metalness: 0.02, bumpMap: grain, bumpScale: 0.02 });
+  const tan = new T.MeshStandardMaterial({ color: 0xc08b63, roughness: 0.69, bumpMap: grain, bumpScale: 0.008 });
+  const blackMetal = new T.MeshStandardMaterial({ color: 0x353833, roughness: 0.33, metalness: 0.65 });
+  const thread = new T.MeshStandardMaterial({ color: 0xa08a6a, roughness: 0.85 });
+  const silver = new T.MeshStandardMaterial({ color: 0xb4b8b4, metalness: 0.95, roughness: 0.22 });
+  const boardMaterial = new T.MeshStandardMaterial({ color: 0xc2a47a, roughness: 0.98 });
   const meshMaterial = new T.MeshStandardMaterial({ map: meshMap, transparent: true, alphaTest: 0.3, side: T.DoubleSide, roughness: 0.9, depthWrite: true });
 
   const model = new T.Group();
@@ -163,7 +172,7 @@ function mountScene(container, mode) {
 
   for (let i = 0; i < 3; i++) {
     const x = (i - 1) * 1.6;
-    box(1.58, 0.095, 2.68, x, 0, 0, leather);
+    box(1.58, 0.095, 2.68, x, 0, 0, padMaterial);
     box(1.54, 0.095, 2.61, x, -0.11, 0, boardMaterial, core, 0.018);
     cord([[x - 0.71, 0.053, -1.24], [x + 0.71, 0.053, -1.24], [x + 0.71, 0.053, 1.24], [x - 0.71, 0.053, 1.24], [x - 0.71, 0.053, -1.24]], thread, 0.007);
   }
@@ -230,6 +239,76 @@ function mountScene(container, mode) {
     box(0.13, 0.07, 0.15, x, 0.07, -1.1, blackMetal);
     box(0.071, 0.03, 0.065, x, 0.116, -1.09, new T.MeshStandardMaterial({ color: 0xbb402d, roughness: 0.7 }));
   }
+  // --- passengers -------------------------------------------------------------------
+  // A stylised dog lying on the platform: the product only reads as a dog bed once
+  // something dog-shaped is on it. Kept low-poly and soft so it looks like a toy figure
+  // rather than an attempt at a real animal.
+  const dogs = new T.Group();
+  upper.add(dogs);
+
+  function makeDog({ x, z, ry = 0, scale = 1, fur, cream, collar = 0x3f5147 }) {
+    const dog = new T.Group();
+    const furMat = new T.MeshStandardMaterial({ color: fur, roughness: 0.96, bumpMap: grain, bumpScale: 0.006 });
+    const creamMat = new T.MeshStandardMaterial({ color: cream, roughness: 0.96 });
+    const darkMat = new T.MeshStandardMaterial({ color: 0x2a2724, roughness: 0.45 });
+    const collarMat = new T.MeshStandardMaterial({ color: collar, roughness: 0.6, metalness: 0.05 });
+
+    const part = (geo, mat, px, py, pz, rx = 0, ry2 = 0, rz = 0) => {
+      const m = new T.Mesh(geo, mat);
+      m.position.set(px, py, pz);
+      m.rotation.set(rx, ry2, rz);
+      m.castShadow = true;
+      m.receiveShadow = true;
+      dog.add(m);
+      return m;
+    };
+
+    // body, lying down
+    part(new RoundedBoxGeometry(1.32, 0.44, 0.66, 5, 0.21), furMat, 0, 0.23, 0);
+    // chest / underside in a lighter tone so the silhouette separates from the bed
+    part(new RoundedBoxGeometry(0.9, 0.2, 0.52, 4, 0.1), creamMat, 0.12, 0.12, 0);
+    // haunch
+    part(new RoundedBoxGeometry(0.5, 0.42, 0.6, 5, 0.2), furMat, -0.52, 0.26, 0);
+
+    // Head sits high and alert: the side walls are chest-height on the model, so a lowered
+    // head disappears behind them from the hero camera angle.
+    const neck = part(new RoundedBoxGeometry(0.3, 0.42, 0.34, 4, 0.14), furMat, 0.58, 0.42, 0);
+    const head = part(new RoundedBoxGeometry(0.46, 0.42, 0.44, 5, 0.18), furMat, 0.76, 0.78, 0);
+    part(new RoundedBoxGeometry(0.28, 0.2, 0.23, 4, 0.09), creamMat, 0.98, 0.71, 0);
+    part(new T.SphereGeometry(0.055, 12, 10), darkMat, 1.11, 0.74, 0);
+    // eyes
+    for (const s of [-1, 1]) part(new T.SphereGeometry(0.04, 10, 8), darkMat, 0.93, 0.86, s * 0.14);
+    // ears, flopped
+    for (const s of [-1, 1]) part(new RoundedBoxGeometry(0.17, 0.32, 0.09, 3, 0.05), furMat, 0.65, 0.8, s * 0.22, 0, 0, s * 0.2);
+    // collar
+    part(new T.TorusGeometry(0.21, 0.04, 8, 20), collarMat, 0.62, 0.5, 0, 0, Math.PI / 2, 0.2);
+    void neck;
+    // front paws stretched forward
+    for (const s of [-1, 1]) part(new RoundedBoxGeometry(0.44, 0.15, 0.17, 3, 0.07), creamMat, 0.62, 0.09, s * 0.19);
+    // tucked rear paw
+    part(new RoundedBoxGeometry(0.26, 0.14, 0.16, 3, 0.06), creamMat, -0.5, 0.08, 0.24);
+    // tail
+    const tailCurve = new T.CatmullRomCurve3([
+      new T.Vector3(-0.74, 0.3, 0.04), new T.Vector3(-0.96, 0.34, 0.22),
+      new T.Vector3(-1.0, 0.2, 0.44), new T.Vector3(-0.84, 0.1, 0.55),
+    ]);
+    const tail = new T.Mesh(new T.TubeGeometry(tailCurve, 20, 0.062, 6, false), furMat);
+    tail.castShadow = true;
+    dog.add(tail);
+
+    head.rotation.z = 0.06;
+    dog.position.set(x, 0.05, z);
+    dog.rotation.y = ry;
+    dog.scale.setScalar(scale);
+    dogs.add(dog);
+    return dog;
+  }
+
+  // Two passengers, kept in the open middle of the bed: anything tucked toward the near
+  // wall gets hidden behind the side panel and straps from the hero camera angle.
+  makeDog({ x: -0.35, z: 0.3, ry: 0.24, scale: 1.24, fur: 0xd59b52, cream: 0xf0e3ca });
+  makeDog({ x: -1.92, z: -0.22, ry: 2.55, scale: 0.86, fur: 0x7d5334, cream: 0xe6d6ba, collar: 0xc08b63 });
+
   const shadow = new T.Mesh(new T.PlaneGeometry(35, 35), new T.ShadowMaterial({ opacity: 0.15 }));
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = -0.38;
@@ -317,6 +396,10 @@ function mountScene(container, mode) {
     upper.position.y = smoothExplode * 0.7;
     core.position.y = -smoothExplode * 0.05;
     lower.position.y = -smoothExplode * 0.78;
+    // The exploded view is about how the platform is built, so the passengers step out.
+    const dogScale = Math.max(0, 1 - smoothExplode * 2.2);
+    dogs.visible = dogScale > 0.01;
+    if (dogs.visible) dogs.scale.setScalar(dogScale);
     shadow.position.y = -0.39 - smoothExplode * 0.85;
     const scale = mode === "story" ? 1 - smoothExplode * 0.08 : 1;
     model.scale.setScalar(scale);
