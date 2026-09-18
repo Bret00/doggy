@@ -20,7 +20,7 @@ function mountScene(container, mode) {
   renderer.toneMapping = T.ACESFilmicToneMapping;
   // Exposure was tuned when every material was near-black. With lighter panels and
   // light-furred dogs it clipped them to white, so the whole rig is pulled back.
-  renderer.toneMappingExposure = 1.02;
+  renderer.toneMappingExposure = 0.74;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = T.PCFSoftShadowMap;
   const canvas = renderer.domElement;
@@ -42,11 +42,11 @@ function mountScene(container, mode) {
   const room = new RoomEnvironment();
   const environment = pmrem.fromScene(room, 0.04);
   scene.environment = environment.texture;
-  scene.environmentIntensity = 0.85;
+  scene.environmentIntensity = 0.62;
   room.dispose();
 
-  scene.add(new T.AmbientLight(0xffffff, 0.5));
-  const key = new T.DirectionalLight(0xfff4e5, 3.3);
+  scene.add(new T.AmbientLight(0xffffff, 0.38));
+  const key = new T.DirectionalLight(0xfff4e5, 2.6);
   key.position.set(2.5, 8, 6);
   key.castShadow = true;
   key.shadow.mapSize.set(1024, 1024);
@@ -58,10 +58,10 @@ function mountScene(container, mode) {
   key.shadow.bias = -0.0003;
   key.shadow.radius = 4;
   scene.add(key);
-  const fill = new T.DirectionalLight(0xe7edff, 1.75);
+  const fill = new T.DirectionalLight(0xe7edff, 1.25);
   fill.position.set(-5, 3, 2);
   scene.add(fill);
-  const rim = new T.DirectionalLight(0xffc5a3, 2.3);
+  const rim = new T.DirectionalLight(0xffc5a3, 1.7);
   rim.position.set(0, 4, -4);
   scene.add(rim);
 
@@ -129,21 +129,22 @@ function mountScene(container, mode) {
   meshMap.repeat.set(4, 4);
   meshMap.colorSpace = T.SRGBColorSpace;
 
-  // Dark grey product with tan trim: close to what actually ships, and the warm stitching
-  // and tabs are the only colour, so the shape still reads instead of going flat black.
-  const leather = new T.MeshStandardMaterial({ color: 0x3d3c39, roughness: 0.66, metalness: 0.02, bumpMap: grain, bumpScale: 0.018 });
-  const darkLeather = new T.MeshStandardMaterial({ color: 0x2a2927, roughness: 0.84, bumpMap: grain, bumpScale: 0.025 });
+  // Soft beige / cream. Low saturation so it reads calm rather than muddy, but each layer
+  // steps down in lightness (pad > walls > base > webbing) so the form still reads, and the
+  // whole thing sits deeper than the ivory page or it would dissolve into the background.
+  const leather = new T.MeshStandardMaterial({ color: 0xc6b8a0, roughness: 0.7, metalness: 0.01, bumpMap: grain, bumpScale: 0.016 });
+  const darkLeather = new T.MeshStandardMaterial({ color: 0xac9c82, roughness: 0.86, bumpMap: grain, bumpScale: 0.022 });
   // `band` is every strap, rail and piping on the model, so a loud colour here floods
-  // the whole product. Dark webbing keeps it structure, not decoration.
-  const band = new T.MeshStandardMaterial({ color: 0x33322e, roughness: 0.86, bumpMap: woven, bumpScale: 0.015 });
-  // The sleeping surface is a touch lighter than the walls so the bed reads as a bed
-  // rather than the inside of one uniform box.
-  const padMaterial = new T.MeshStandardMaterial({ color: 0x4a4843, roughness: 0.72, metalness: 0.02, bumpMap: grain, bumpScale: 0.02 });
-  const tan = new T.MeshStandardMaterial({ color: 0xc08b63, roughness: 0.69, bumpMap: grain, bumpScale: 0.008 });
-  const blackMetal = new T.MeshStandardMaterial({ color: 0x3a3b37, roughness: 0.33, metalness: 0.6 });
-  const thread = new T.MeshStandardMaterial({ color: 0xc9ae85, roughness: 0.85 });
-  const silver = new T.MeshStandardMaterial({ color: 0xb4b8b4, metalness: 0.95, roughness: 0.22 });
-  const boardMaterial = new T.MeshStandardMaterial({ color: 0xc2a47a, roughness: 0.98 });
+  // the whole product. A deeper greige keeps it structure, not decoration.
+  const band = new T.MeshStandardMaterial({ color: 0x9e8e76, roughness: 0.88, bumpMap: woven, bumpScale: 0.014 });
+  // The sleeping surface is the lightest panel so the bed reads as a bed rather than
+  // the inside of one uniform box.
+  const padMaterial = new T.MeshStandardMaterial({ color: 0xd9cdb8, roughness: 0.75, metalness: 0.01, bumpMap: grain, bumpScale: 0.018 });
+  const tan = new T.MeshStandardMaterial({ color: 0xb5825a, roughness: 0.68, bumpMap: grain, bumpScale: 0.008 });
+  const blackMetal = new T.MeshStandardMaterial({ color: 0x8b8475, roughness: 0.35, metalness: 0.55 });
+  const thread = new T.MeshStandardMaterial({ color: 0xefe7d8, roughness: 0.86 });
+  const silver = new T.MeshStandardMaterial({ color: 0xada79a, metalness: 0.9, roughness: 0.26 });
+  const boardMaterial = new T.MeshStandardMaterial({ color: 0xd3c09b, roughness: 0.98 });
   const meshMaterial = new T.MeshStandardMaterial({ map: meshMap, transparent: true, alphaTest: 0.3, side: T.DoubleSide, roughness: 0.9, depthWrite: true });
 
   const model = new T.Group();
@@ -306,9 +307,9 @@ function mountScene(container, mode) {
 
   // Two passengers, kept in the open middle of the bed: anything tucked toward the near
   // wall gets hidden behind the side panel and straps from the hero camera angle.
-  // Light coats against the dark grey bed, which is where they read best.
-  makeDog({ x: -0.35, z: 0.3, ry: 0.24, scale: 1.24, fur: 0xd19b55, cream: 0xf2e7d1 });
-  makeDog({ x: -1.92, z: -0.22, ry: 2.55, scale: 0.86, fur: 0xdcd2bf, cream: 0xf2ece0, collar: 0xc08b63 });
+  // Darker coats now the bed is cream, or they vanish into it.
+  makeDog({ x: -0.35, z: 0.3, ry: 0.24, scale: 1.24, fur: 0x7a5636, cream: 0xefe4d0, collar: 0x3f5147 });
+  makeDog({ x: -1.92, z: -0.22, ry: 2.55, scale: 0.86, fur: 0x585349, cream: 0xe7ddca, collar: 0xb5825a });
 
   const shadow = new T.Mesh(new T.PlaneGeometry(35, 35), new T.ShadowMaterial({ opacity: 0.15 }));
   shadow.rotation.x = -Math.PI / 2;
