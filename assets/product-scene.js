@@ -129,22 +129,21 @@ function mountScene(container, mode) {
   meshMap.repeat.set(4, 4);
   meshMap.colorSpace = T.SRGBColorSpace;
 
-  // Cream-and-brown leather, tuned to sit in the same warm family as the ivory page
-  // rather than the grey-olive it was. Walls mid-tan, sleeping surface creamier, and
-  // the structural bits a deeper brown so the shape still reads.
-  const leather = new T.MeshStandardMaterial({ color: 0x9a7a58, roughness: 0.66, metalness: 0.02, bumpMap: grain, bumpScale: 0.018 });
-  const darkLeather = new T.MeshStandardMaterial({ color: 0x6b5138, roughness: 0.84, bumpMap: grain, bumpScale: 0.025 });
+  // Dark grey product with tan trim: close to what actually ships, and the warm stitching
+  // and tabs are the only colour, so the shape still reads instead of going flat black.
+  const leather = new T.MeshStandardMaterial({ color: 0x3d3c39, roughness: 0.66, metalness: 0.02, bumpMap: grain, bumpScale: 0.018 });
+  const darkLeather = new T.MeshStandardMaterial({ color: 0x2a2927, roughness: 0.84, bumpMap: grain, bumpScale: 0.025 });
   // `band` is every strap, rail and piping on the model, so a loud colour here floods
-  // the whole product. Deep brown webbing keeps it as structure, not decoration.
-  const band = new T.MeshStandardMaterial({ color: 0x5d4632, roughness: 0.86, bumpMap: woven, bumpScale: 0.015 });
-  // The sleeping surface is the creamiest panel so the bed reads as a bed rather than
-  // the inside of one uniform box.
-  const padMaterial = new T.MeshStandardMaterial({ color: 0xc4a87f, roughness: 0.72, metalness: 0.02, bumpMap: grain, bumpScale: 0.02 });
-  const tan = new T.MeshStandardMaterial({ color: 0xd9b888, roughness: 0.69, bumpMap: grain, bumpScale: 0.008 });
-  const blackMetal = new T.MeshStandardMaterial({ color: 0x4a3b2c, roughness: 0.33, metalness: 0.6 });
-  const thread = new T.MeshStandardMaterial({ color: 0xe6d5b8, roughness: 0.85 });
-  const silver = new T.MeshStandardMaterial({ color: 0xbfc2bd, metalness: 0.95, roughness: 0.22 });
-  const boardMaterial = new T.MeshStandardMaterial({ color: 0xd8bd93, roughness: 0.98 });
+  // the whole product. Dark webbing keeps it structure, not decoration.
+  const band = new T.MeshStandardMaterial({ color: 0x33322e, roughness: 0.86, bumpMap: woven, bumpScale: 0.015 });
+  // The sleeping surface is a touch lighter than the walls so the bed reads as a bed
+  // rather than the inside of one uniform box.
+  const padMaterial = new T.MeshStandardMaterial({ color: 0x4a4843, roughness: 0.72, metalness: 0.02, bumpMap: grain, bumpScale: 0.02 });
+  const tan = new T.MeshStandardMaterial({ color: 0xc08b63, roughness: 0.69, bumpMap: grain, bumpScale: 0.008 });
+  const blackMetal = new T.MeshStandardMaterial({ color: 0x3a3b37, roughness: 0.33, metalness: 0.6 });
+  const thread = new T.MeshStandardMaterial({ color: 0xc9ae85, roughness: 0.85 });
+  const silver = new T.MeshStandardMaterial({ color: 0xb4b8b4, metalness: 0.95, roughness: 0.22 });
+  const boardMaterial = new T.MeshStandardMaterial({ color: 0xc2a47a, roughness: 0.98 });
   const meshMaterial = new T.MeshStandardMaterial({ map: meshMap, transparent: true, alphaTest: 0.3, side: T.DoubleSide, roughness: 0.9, depthWrite: true });
 
   const model = new T.Group();
@@ -307,9 +306,9 @@ function mountScene(container, mode) {
 
   // Two passengers, kept in the open middle of the bed: anything tucked toward the near
   // wall gets hidden behind the side panel and straps from the hero camera angle.
-  // Darker coats now that the bed is cream — a golden dog on a cream pad disappears.
-  makeDog({ x: -0.35, z: 0.3, ry: 0.24, scale: 1.24, fur: 0x4f433a, cream: 0xe9dcc4 });
-  makeDog({ x: -1.92, z: -0.22, ry: 2.55, scale: 0.86, fur: 0x9c5a30, cream: 0xeadcc0 });
+  // Light coats against the dark grey bed, which is where they read best.
+  makeDog({ x: -0.35, z: 0.3, ry: 0.24, scale: 1.24, fur: 0xd19b55, cream: 0xf2e7d1 });
+  makeDog({ x: -1.92, z: -0.22, ry: 2.55, scale: 0.86, fur: 0xdcd2bf, cream: 0xf2ece0, collar: 0xc08b63 });
 
   const shadow = new T.Mesh(new T.PlaneGeometry(35, 35), new T.ShadowMaterial({ opacity: 0.15 }));
   shadow.rotation.x = -Math.PI / 2;
