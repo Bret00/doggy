@@ -129,21 +129,22 @@ function mountScene(container, mode) {
   meshMap.repeat.set(4, 4);
   meshMap.colorSpace = T.SRGBColorSpace;
 
-  // Everything used to sit within a few shades of black, which read as one dark mass on the
-  // ivory page. Panels are separated by tone now, and the trim carries the brand green.
-  const leather = new T.MeshStandardMaterial({ color: 0x43413c, roughness: 0.64, metalness: 0.03, bumpMap: grain, bumpScale: 0.018 });
-  const darkLeather = new T.MeshStandardMaterial({ color: 0x2b2a27, roughness: 0.82, bumpMap: grain, bumpScale: 0.025 });
-  // `band` is every strap, rail and piping on the model — brand green here floods the whole
-  // product and it reads as a green cage. Keep it a dark webbing; green stays an accent.
-  const band = new T.MeshStandardMaterial({ color: 0x35372f, roughness: 0.86, bumpMap: woven, bumpScale: 0.015 });
-  // The sleeping surface is a shade warmer than the walls so the bed reads as a bed
-  // rather than the inside of one uniform box.
-  const padMaterial = new T.MeshStandardMaterial({ color: 0x554f47, roughness: 0.7, metalness: 0.02, bumpMap: grain, bumpScale: 0.02 });
-  const tan = new T.MeshStandardMaterial({ color: 0xc08b63, roughness: 0.69, bumpMap: grain, bumpScale: 0.008 });
-  const blackMetal = new T.MeshStandardMaterial({ color: 0x353833, roughness: 0.33, metalness: 0.65 });
-  const thread = new T.MeshStandardMaterial({ color: 0xa08a6a, roughness: 0.85 });
-  const silver = new T.MeshStandardMaterial({ color: 0xb4b8b4, metalness: 0.95, roughness: 0.22 });
-  const boardMaterial = new T.MeshStandardMaterial({ color: 0xc2a47a, roughness: 0.98 });
+  // Cream-and-brown leather, tuned to sit in the same warm family as the ivory page
+  // rather than the grey-olive it was. Walls mid-tan, sleeping surface creamier, and
+  // the structural bits a deeper brown so the shape still reads.
+  const leather = new T.MeshStandardMaterial({ color: 0x9a7a58, roughness: 0.66, metalness: 0.02, bumpMap: grain, bumpScale: 0.018 });
+  const darkLeather = new T.MeshStandardMaterial({ color: 0x6b5138, roughness: 0.84, bumpMap: grain, bumpScale: 0.025 });
+  // `band` is every strap, rail and piping on the model, so a loud colour here floods
+  // the whole product. Deep brown webbing keeps it as structure, not decoration.
+  const band = new T.MeshStandardMaterial({ color: 0x5d4632, roughness: 0.86, bumpMap: woven, bumpScale: 0.015 });
+  // The sleeping surface is the creamiest panel so the bed reads as a bed rather than
+  // the inside of one uniform box.
+  const padMaterial = new T.MeshStandardMaterial({ color: 0xc4a87f, roughness: 0.72, metalness: 0.02, bumpMap: grain, bumpScale: 0.02 });
+  const tan = new T.MeshStandardMaterial({ color: 0xd9b888, roughness: 0.69, bumpMap: grain, bumpScale: 0.008 });
+  const blackMetal = new T.MeshStandardMaterial({ color: 0x4a3b2c, roughness: 0.33, metalness: 0.6 });
+  const thread = new T.MeshStandardMaterial({ color: 0xe6d5b8, roughness: 0.85 });
+  const silver = new T.MeshStandardMaterial({ color: 0xbfc2bd, metalness: 0.95, roughness: 0.22 });
+  const boardMaterial = new T.MeshStandardMaterial({ color: 0xd8bd93, roughness: 0.98 });
   const meshMaterial = new T.MeshStandardMaterial({ map: meshMap, transparent: true, alphaTest: 0.3, side: T.DoubleSide, roughness: 0.9, depthWrite: true });
 
   const model = new T.Group();
@@ -306,8 +307,9 @@ function mountScene(container, mode) {
 
   // Two passengers, kept in the open middle of the bed: anything tucked toward the near
   // wall gets hidden behind the side panel and straps from the hero camera angle.
-  makeDog({ x: -0.35, z: 0.3, ry: 0.24, scale: 1.24, fur: 0xd59b52, cream: 0xf0e3ca });
-  makeDog({ x: -1.92, z: -0.22, ry: 2.55, scale: 0.86, fur: 0x7d5334, cream: 0xe6d6ba, collar: 0xc08b63 });
+  // Darker coats now that the bed is cream — a golden dog on a cream pad disappears.
+  makeDog({ x: -0.35, z: 0.3, ry: 0.24, scale: 1.24, fur: 0x4f433a, cream: 0xe9dcc4 });
+  makeDog({ x: -1.92, z: -0.22, ry: 2.55, scale: 0.86, fur: 0x9c5a30, cream: 0xeadcc0 });
 
   const shadow = new T.Mesh(new T.PlaneGeometry(35, 35), new T.ShadowMaterial({ opacity: 0.15 }));
   shadow.rotation.x = -Math.PI / 2;
@@ -378,7 +380,12 @@ function mountScene(container, mode) {
     if (mode === "story" && story) {
       const r = story.getBoundingClientRect();
       progress = clamp(-r.top / (story.offsetHeight - innerHeight));
-      targetY = -0.48 + smoothstep(progress / 0.28) * 1.0 + smoothstep((progress - 0.48) / 0.28) * 1.7 + smoothstep((progress - 0.77) / 0.23) * 3.25;
+      // Turns on its own so the product is always moving — waiting for the visitor to
+      // scroll before anything happened lost people who only glance at the section.
+      // The exploded view still follows scroll, since it belongs to a specific chapter.
+      targetY = reduced.matches
+        ? -0.48 + smoothstep(progress / 0.28) * 1.0 + smoothstep((progress - 0.48) / 0.28) * 1.7 + smoothstep((progress - 0.77) / 0.23) * 3.25
+        : -0.48 + time * 0.00028;
       explode = smoothstep((progress - 0.23) / 0.1) * (1 - smoothstep((progress - 0.45) / 0.12));
       tilt = explode * 0.15;
     } else if (hero) {
