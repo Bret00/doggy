@@ -1,0 +1,55 @@
+{%- comment -%}
+  A short row of products on the homepage. The homepage's job is to send people to the
+  Shop and the product page, not to be the shop itself — so this shows a handful and links
+  on, rather than repeating the whole grid.
+{%- endcomment -%}
+{%- liquid
+  assign featured = section.settings.collection
+  assign limit = section.settings.product_limit
+-%}
+<section class="featured-products section-pad" {% if section.settings.anchor_id != blank %}id="{{ section.settings.anchor_id }}"{% endif %}>
+  <header class="featured-head">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2>
+        {{ section.settings.heading_line1 }}
+        {%- if section.settings.heading_line2 != blank -%}
+          <br><span class="featured-head-alt">{{ section.settings.heading_line2 }}</span>
+        {%- endif -%}
+      </h2>
+    </div>
+    {%- if featured != blank -%}
+      <a class="featured-all" href="{{ featured.url }}">
+        {{ section.settings.link_text }} {% render 'icon', name: 'arrow-up-right', size: 17 %}
+      </a>
+    {%- endif -%}
+  </header>
+
+  {%- if featured != blank and featured.products.size > 0 -%}
+    <div class="product-grid featured-grid">
+      {%- for product in featured.products limit: limit -%}
+        {%- render 'product-card', card_product: product -%}
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <p class="featured-empty">Pick a collection for this section in the theme editor.</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "shop" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "product_limit", "label": "How many to show", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "EVERYTHING FOR THE BACK SEAT" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Built around" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "the back seat." },
+    { "type": "text", "id": "link_text", "label": "Link text", "default": "See everything" }
+  ],
+  "presets": [{ "name": "Featured products" }]
+}
+{% endschema %}

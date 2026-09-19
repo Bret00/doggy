@@ -115,6 +115,18 @@ footer .brand-dot,.navigation-sheet .brand-dot{color:#d9c3a5}
 .payment-icons{display:flex;flex-wrap:wrap;gap:7px;list-style:none;margin:0;padding:0}
 .payment-icons svg{height:23px;width:auto;display:block;border-radius:3px}
 
+/* Featured products row on the homepage. The grid rules are shared with the Shop page;
+   this only adds the heading row and trims the top padding, since the section sits
+   between two others rather than under a page header. */
+.featured-products{padding-top:clamp(52px,6vw,84px)}
+.featured-head{display:flex;flex-wrap:wrap;gap:18px 30px;align-items:flex-end;justify-content:space-between;max-width:1180px;margin:0 auto;padding:0 7%}
+.featured-head h2{font-family:var(--font-display);font-size:clamp(30px,3.8vw,50px);letter-spacing:-.04em;line-height:1.05;font-weight:600;margin:18px 0 0}
+.featured-head-alt{color:#7d7263}
+.featured-all{display:inline-flex;align-items:center;gap:7px;font-size:14px;color:var(--ink);text-decoration:underline;text-underline-offset:5px;white-space:nowrap}
+.featured-grid{padding-top:clamp(28px,3.5vw,42px)}
+.featured-empty{max-width:1180px;margin:0 auto;padding:30px 7%;color:#6a6152}
+@media(max-width:600px){.featured-head{align-items:flex-start}.featured-head h2{margin-top:12px}}
+
 /* Search results page */
 .search-page-form{max-width:1180px;margin:0 auto;padding:clamp(26px,3vw,36px) 7% 0}
 .search-page-form form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
