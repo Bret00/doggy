@@ -380,12 +380,13 @@ function mountScene(container, mode) {
     if (mode === "story" && story) {
       const r = story.getBoundingClientRect();
       progress = clamp(-r.top / (story.offsetHeight - innerHeight));
-      // Turns on its own so the product is always moving — waiting for the visitor to
-      // scroll before anything happened lost people who only glance at the section.
-      // The exploded view still follows scroll, since it belongs to a specific chapter.
+      // Turns on its own so the product is always moving. At the old rate a full turn took
+      // 22s, which reads as frozen next to the hero — that one visibly rotates as you
+      // scroll past it, so this one looked broken by comparison. ~9s a turn is clearly
+      // moving at a glance. The exploded view still follows scroll; it belongs to a chapter.
       targetY = reduced.matches
         ? -0.48 + smoothstep(progress / 0.28) * 1.0 + smoothstep((progress - 0.48) / 0.28) * 1.7 + smoothstep((progress - 0.77) / 0.23) * 3.25
-        : -0.48 + time * 0.00028;
+        : -0.48 + time * 0.0007;
       explode = smoothstep((progress - 0.23) / 0.1) * (1 - smoothstep((progress - 0.45) / 0.12));
       tilt = explode * 0.15;
     } else if (hero) {
