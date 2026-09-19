@@ -52,6 +52,13 @@ footer .brand-dot,.navigation-sheet .brand-dot{color:#d9c3a5}
 .collection-pagination a{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
 @media(max-width:450px){.product-grid{grid-template-columns:1fr 1fr;gap:16px}.product-card h3{font-size:14px}}
 
+.media-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:repeating-linear-gradient(135deg,#ebe1d2 0 12px,#e5dac8 12px 24px)}
+.media-placeholder img{width:52px;height:52px;opacity:.5;object-fit:contain}
+.media-placeholder span{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:#6f6455}
+.media-placeholder-lg{position:relative;inset:auto;aspect-ratio:1;width:100%;border-radius:10px;gap:18px}
+.media-placeholder-lg img{width:84px;height:84px}
+.media-placeholder-lg span{font-size:13px}
+
 .page-header{max-width:1180px;margin:0 auto;padding:clamp(60px,7vw,104px) 7% 0}
 .page-header .eyebrow{color:#7d7263}
 .page-header h1{font-family:var(--font-display);font-size:clamp(38px,5vw,70px);letter-spacing:-.048em;line-height:1.02;font-weight:600;margin:24px 0 0}

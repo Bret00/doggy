@@ -19,7 +19,10 @@
             <img src="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" data-gallery-image {% unless forloop.first %}hidden{% endunless %}>
           {%- endfor -%}
         {%- else -%}
-          <img src="{{ 'product.webp' | asset_url }}" alt="{{ product.title | escape }}" width="1000" height="1000" data-gallery-image>
+          <div class="media-placeholder media-placeholder-lg" role="img" aria-label="Photo coming soon for {{ product.title | escape }}">
+            <img src="{{ 'roadnest-mark.svg' | asset_url }}" alt="" width="84" height="84">
+            <span>Photo coming soon</span>
+          </div>
         {%- endif -%}
         <div class="gallery-controls">
           <button type="button" data-gallery-prev aria-label="Previous product image">{% render 'icon', name: 'chevron-left', size: 20 %}</button>

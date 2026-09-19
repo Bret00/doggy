@@ -10,7 +10,14 @@
            alt="{{ card_product.featured_image.alt | default: card_product.title | escape }}"
            width="{{ card_product.featured_image.width }}" height="{{ card_product.featured_image.height }}" loading="lazy">
     {%- else -%}
-      <img src="{{ 'product.webp' | asset_url }}" alt="{{ card_product.title | escape }}" width="700" height="700" loading="lazy">
+      {%- comment -%}
+        No fallback to another product's photo — that would put the flat-bed shot on an
+        accessory card and misrepresent what's being sold. Neutral placeholder instead.
+      {%- endcomment -%}
+      <div class="media-placeholder" role="img" aria-label="Photo coming soon for {{ card_product.title | escape }}">
+        <img src="{{ 'roadnest-mark.svg' | asset_url }}" alt="" width="52" height="52" loading="lazy">
+        <span>Photo coming soon</span>
+      </div>
     {%- endif -%}
     {%- if card_product.compare_at_price > card_product.price -%}
       <span class="product-card-badge">Save {{ card_product.compare_at_price | minus: card_product.price | money_without_trailing_zeros }}</span>
