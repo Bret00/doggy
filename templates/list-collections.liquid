@@ -1,11 +1,22 @@
-<div class="section-pad simple-page">
-  <h1 class="simple-page-title">Collections</h1>
-  <div class="simple-collection-grid">
+<section class="collection-page">
+  <header class="page-header">
+    <span class="eyebrow">SHOP</span>
+    <h1>Collections</h1>
+    <div class="page-rule" aria-hidden="true"></div>
+  </header>
+  <div class="product-grid">
     {%- for collection in collections -%}
-      <a href="{{ collection.url }}" class="simple-collection-card">
-        {%- if collection.image -%}<img src="{{ collection.image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" width="600" height="600" loading="lazy">{%- endif -%}
+      <a class="product-card" href="{{ collection.url }}">
+        <div class="product-card-media">
+          {%- if collection.image -%}
+            <img src="{{ collection.image | image_url: width: 700 }}" alt="{{ collection.title | escape }}" width="700" height="700" loading="lazy">
+          {%- elsif collection.products.first.featured_image -%}
+            <img src="{{ collection.products.first.featured_image | image_url: width: 700 }}" alt="{{ collection.title | escape }}" width="700" height="700" loading="lazy">
+          {%- endif -%}
+        </div>
         <h3>{{ collection.title }}</h3>
+        <div class="product-card-price"><span>{{ collection.all_products_count }} items</span></div>
       </a>
     {%- endfor -%}
   </div>
-</div>
+</section>

@@ -1,0 +1,28 @@
+{%- comment -%}
+  Product card. Dropship photos vary wildly in shape and background, so the image sits in a
+  fixed-ratio tile on a tinted panel — that keeps a white-background supplier shot from
+  looking pasted onto the page next to a proper one.
+{%- endcomment -%}
+<a class="product-card" href="{{ card_product.url }}">
+  <div class="product-card-media">
+    {%- if card_product.featured_image -%}
+      <img src="{{ card_product.featured_image | image_url: width: 700 }}"
+           alt="{{ card_product.featured_image.alt | default: card_product.title | escape }}"
+           width="{{ card_product.featured_image.width }}" height="{{ card_product.featured_image.height }}" loading="lazy">
+    {%- else -%}
+      <img src="{{ 'product.webp' | asset_url }}" alt="{{ card_product.title | escape }}" width="700" height="700" loading="lazy">
+    {%- endif -%}
+    {%- if card_product.compare_at_price > card_product.price -%}
+      <span class="product-card-badge">Save {{ card_product.compare_at_price | minus: card_product.price | money_without_trailing_zeros }}</span>
+    {%- elsif card_product.available == false -%}
+      <span class="product-card-badge">Sold out</span>
+    {%- endif -%}
+  </div>
+  <h3>{{ card_product.title }}</h3>
+  <div class="product-card-price">
+    <span>{{ card_product.price | money }}</span>
+    {%- if card_product.compare_at_price > card_product.price -%}
+      <s>{{ card_product.compare_at_price | money }}</s>
+    {%- endif -%}
+  </div>
+</a>
