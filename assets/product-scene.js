@@ -2,6 +2,15 @@ import * as T from "./three.module.min.js";
 import { RoundedBoxGeometry } from "./rounded-box-geometry.js";
 import { RoomEnvironment } from "./room-environment.js";
 
+// One pose per chapter of the story section. Chapter 2 is the construction point, so that
+// is where the platform pulls apart into its layers.
+const STORY_PHASES = [
+  { turn: 0, explode: 0 },
+  { turn: 1.35, explode: 1 },
+  { turn: 2.7, explode: 0 },
+  { turn: 4.05, explode: 0 },
+];
+
 function markUnavailable(container) {
   container.classList.remove("scene-ready");
   const note = container.querySelector(".scene-unavailable");
@@ -377,15 +386,20 @@ function mountScene(container, mode) {
     lastFrame = time;
     let progress = 0, explode = 0, tilt = 0;
     if (mode === "story" && story) {
-      // Purely self-driven: one steady turn, roughly 9 seconds each. Scroll deliberately
-      // does nothing to this model — no rotation, no tilt, and no pulling apart — because
-      // scroll-linked motion read as "it only moves if I drag the page".
-      targetY = reduced.matches ? -0.48 : -0.48 + time * 0.0007;
+      // Follows whichever chapter the section is showing, and that advances on its own
+      // timer (see roadnest.js). Scroll does nothing here. Each phase gets its own angle
+      // so the model visibly turns between them, and one phase pulls apart to show the
+      // layers - which used to be tied to scroll position.
+      const chapter = Number(story.getAttribute("data-chapter") || 0);
+      const phase = STORY_PHASES[Math.min(chapter, STORY_PHASES.length - 1)];
+      targetY = -0.48 + phase.turn;
+      explode = phase.explode;
+      tilt = explode * 0.15;
     } else if (hero) {
-      const r = hero.getBoundingClientRect();
-      progress = clamp(-r.top / r.height);
-      targetY = -0.48 + progress * 0.9;
-      tilt = progress * 0.08;
+      // Same as the story model: it turns on its own and scroll does nothing to it.
+      // Dragging still works — `rotation.current` is added to this below — so a visitor
+      // can grab it and spin it themselves, it just no longer moves with the page.
+      targetY = reduced.matches ? -0.48 : -0.48 + time * 0.0007;
     }
     const speed = reduced.matches ? 1 : 0.07;
     smoothY += (targetY + rotation.current - smoothY) * speed;

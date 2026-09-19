@@ -17,6 +17,25 @@ details.accordion-item{border-bottom:1px solid var(--border)}details.accordion-i
 footer .brand-dot,.navigation-sheet .brand-dot{color:#d9c3a5}
 .design-story .scene-unavailable{color:#b0a391}
 
+.design-story{height:auto;min-height:0}
+.story-sticky{position:relative;top:auto;height:auto;min-height:0;max-height:none;padding-bottom:10px}
+.story-stage{flex:0 0 auto;height:clamp(400px,46vw,540px);min-height:0}
+.story-copy{height:auto;min-height:300px;align-self:center}
+.chapter-tabs{margin-bottom:30px}
+@media(max-width:800px){
+  .story-sticky{top:auto;height:auto;min-height:0;max-height:none}
+  .story-stage{height:auto;display:flex;flex-direction:column}
+  .story-copy{position:relative;height:auto;min-height:250px;width:88%;margin:28px 0 0 6%}
+  .story-model{position:relative;top:auto;bottom:auto;left:auto;right:auto;height:330px;margin:0}
+  .story-model .product-scene{inset:-8% -4% -2%}
+  .story-model .model-caption{bottom:2%;left:7%}
+  .model-disclaimer{top:2%;right:7%}
+}
+@media(max-width:450px){
+  .story-copy{min-height:250px}
+  .story-model{height:280px}
+}
+
 .page-header{max-width:1180px;margin:0 auto;padding:clamp(60px,7vw,104px) 7% 0}
 .page-header .eyebrow{color:#7d7263}
 .page-header h1{font-family:var(--font-display);font-size:clamp(38px,5vw,70px);letter-spacing:-.048em;line-height:1.02;font-weight:600;margin:24px 0 0}

@@ -7,7 +7,7 @@
     <div class="story-stage">
       <div class="story-copy" aria-live="off" data-story-copy>
         {%- for block in section.blocks -%}
-          <div class="story-chapter{% if forloop.first %} active{% endif %}" aria-hidden="{% unless forloop.first %}true{% else %}false{% endunless %}" {{ block.shopify_attributes }}>
+          <div class="story-chapter{% if forloop.first %} active{% endif %}" aria-hidden="{% unless forloop.first %}true{% else %}false{% endunless %}" data-caption="{{ block.settings.caption | escape }}" {{ block.shopify_attributes }}>
             <span class="story-eyebrow">{{ block.settings.eyebrow }}</span>
             <h2><span>{{ block.settings.heading_line1 }}<br></span><span class="accent-text">{{ block.settings.heading_line2 }}<br></span></h2>
             <p>{{ block.settings.body }}</p>

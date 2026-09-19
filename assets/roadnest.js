@@ -261,15 +261,24 @@
     updateParallax();
   }
 
-  /* ---------- Design story scroll ---------- */
+  /* ---------- Design story: advances itself ---------- */
+  // This section used to be 3.6 screens tall with a pinned panel, so scrolling past it
+  // felt like the page had frozen while the chapters advanced. It is a normal-height
+  // section now that cycles on a timer; scroll does nothing to it.
   var story = document.querySelector("[data-story]");
   if (story) {
     var chapters = Array.prototype.slice.call(story.querySelectorAll(".story-chapter"));
     var tabs = Array.prototype.slice.call(story.querySelectorAll("[data-story-tab]"));
     var counter = story.querySelector("[data-story-counter]");
     var progressBar = story.querySelector("[data-story-progress]");
+    var caption = story.querySelector("[data-story-caption]");
+    var captions = chapters.map(function (ch) { return ch.getAttribute("data-caption") || ""; });
     var count = chapters.length || 1;
+    var HOLD = 5200; // ms per chapter
     var currentChapter = -1;
+    var phaseStart = 0;
+    var paused = false;
+    var rafId = 0;
 
     function setChapter(i) {
       if (i === currentChapter) return;
@@ -285,31 +294,48 @@
         if (active) tab.setAttribute("aria-current", "step"); else tab.removeAttribute("aria-current");
       });
       if (counter) counter.innerHTML = "0" + (i + 1) + " <span>/ 0" + count + "</span>";
+      if (caption && captions[i]) caption.textContent = captions[i];
+      // the 3D scene follows this, so it changes pose with the copy
+      story.setAttribute("data-chapter", String(i));
+      phaseStart = performance.now();
     }
 
-    function onStoryScroll() {
-      var rect = story.getBoundingClientRect();
-      var scrollable = story.offsetHeight - window.innerHeight;
-      var progress = scrollable > 0 ? -rect.top / scrollable : 0;
-      progress = Math.max(0, Math.min(1, progress));
-      var chapterIndex = Math.min(count - 1, Math.floor(progress * count));
-      setChapter(chapterIndex);
-      story.style.setProperty("--story-progress", String(progress));
-      if (progressBar) progressBar.style.transform = "scaleX(" + progress + ")";
+    function tick(now) {
+      rafId = requestAnimationFrame(tick);
+      if (paused) { phaseStart = now - 0; return; }
+      var elapsed = now - phaseStart;
+      var t = Math.min(1, elapsed / HOLD);
+      if (progressBar) progressBar.style.transform = "scaleX(" + t + ")";
+      story.style.setProperty("--story-progress", String((currentChapter + t) / count));
+      if (elapsed >= HOLD) setChapter((currentChapter + 1) % count);
     }
 
-    var storyTicking = false;
-    window.addEventListener("scroll", function () {
-      if (!storyTicking) { requestAnimationFrame(function () { onStoryScroll(); storyTicking = false; }); storyTicking = true; }
-    }, { passive: true });
-    onStoryScroll();
+    // Only run while the section is on screen, so it is not burning frames off-screen
+    // and visitors do not arrive mid-cycle.
+    var visible = true;
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        paused = !visible || hovering;
+      }, { threshold: 0.12 }).observe(story);
+    }
+
+    var hovering = false;
+    story.addEventListener("pointerenter", function () { hovering = true; paused = true; });
+    story.addEventListener("pointerleave", function () { hovering = false; paused = !visible; });
 
     tabs.forEach(function (tab, i) {
-      tab.addEventListener("click", function () {
-        var top = story.getBoundingClientRect().top + window.scrollY;
-        var distance = story.offsetHeight - window.innerHeight;
-        window.scrollTo({ top: top + distance * ((i + 0.22) / count), behavior: reduced.matches ? "instant" : "smooth" });
-      });
+      tab.addEventListener("click", function () { setChapter(i); });
     });
+
+    setChapter(0);
+    if (reduced.matches) {
+      // no auto-advance for reduced motion; the tabs still work
+      if (progressBar) progressBar.style.transform = "scaleX(0)";
+    } else {
+      phaseStart = performance.now();
+      rafId = requestAnimationFrame(tick);
+    }
+    void rafId;
   }
 })();
