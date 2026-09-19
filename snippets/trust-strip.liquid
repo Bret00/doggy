@@ -1,0 +1,22 @@
+{%- comment -%}
+  Reassurance row. The payment icons come from `shop.enabled_payment_types`, so this shows
+  the methods actually enabled at checkout rather than a hardcoded set of logos the store
+  may not accept.
+{%- endcomment -%}
+<aside class="trust-strip" aria-label="Shopping with us">
+  <ul class="trust-points">
+    <li>{% render 'icon', name: 'check', size: 16 %}<span>Free shipping across Canada</span></li>
+    <li>{% render 'icon', name: 'rotate-ccw', size: 16 %}<span>30-day money-back guarantee</span></li>
+    <li>{% render 'icon', name: 'shopping-bag', size: 16 %}<span>Tracked on every order</span></li>
+  </ul>
+  {%- if shop.enabled_payment_types.size > 0 -%}
+    <div class="trust-payments">
+      <span class="trust-payments-label">Secure checkout</span>
+      <ul class="payment-icons">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+</aside>

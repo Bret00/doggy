@@ -13,6 +13,19 @@
   </nav>
 
   <div class="header-actions">
+    {%- comment -%}
+      A real search form posting to /search, so it still works with JS off. The input is
+      collapsed to an icon until opened, which keeps the header from getting crowded next
+      to the nav.
+    {%- endcomment -%}
+    <form action="{{ routes.search_url }}" method="get" role="search" class="header-search" data-search-form>
+      <input type="hidden" name="type" value="product">
+      <label class="visually-hidden" for="HeaderSearch">Search products</label>
+      <input type="search" id="HeaderSearch" name="q" placeholder="Search" autocomplete="off" value="{{ search.terms | escape }}" data-search-input>
+      <button type="submit" class="header-search-submit" aria-label="Search">{% render 'icon', name: 'search', size: 19 %}</button>
+      <button type="button" class="header-search-close" aria-label="Close search" data-search-close>{% render 'icon', name: 'x', size: 18 %}</button>
+    </form>
+    <button type="button" class="header-search-open" aria-label="Open search" aria-expanded="false" data-search-open>{% render 'icon', name: 'search', size: 20 %}</button>
     <a href="{{ section.settings.shop_link }}" class="nav-shop">{{ section.settings.shop_link_text }} {% render 'icon', name: 'arrow-up-right', size: 16 %}</a>
     <button type="button" class="bag-button" data-cart-toggle aria-haspopup="dialog" aria-controls="CartDrawer" aria-label="Open bag, {{ cart.item_count }} items">
       {% render 'icon', name: 'shopping-bag', size: 20 %}<span>Bag (<span data-cart-count>{{ cart.item_count }}</span>)</span>

@@ -2,8 +2,20 @@
   Product card. Dropship photos vary wildly in shape and background, so the image sits in a
   fixed-ratio tile on a tinted panel — that keeps a white-background supplier shot from
   looking pasted onto the page next to a proper one.
+
+  The card is a div, not an anchor, because it contains an add-to-bag form and a form
+  can't live inside a link. The title link is stretched over the whole card instead, so
+  clicking anywhere but the form still opens the product.
 {%- endcomment -%}
-<a class="product-card" href="{{ card_product.url }}">
+{%- liquid
+  assign variant = card_product.selected_or_first_available_variant
+  assign blurb = card_product.metafields.custom.short_description.value | default: card_product.description
+  assign on_sale = false
+  if card_product.compare_at_price > card_product.price
+    assign on_sale = true
+  endif
+-%}
+<div class="product-card" data-filter-name="{{ card_product.title | escape }}">
   <div class="product-card-media">
     {%- if card_product.featured_image -%}
       <img src="{{ card_product.featured_image | image_url: width: 700 }}"
@@ -19,17 +31,51 @@
         <span>Photo coming soon</span>
       </div>
     {%- endif -%}
-    {%- if card_product.compare_at_price > card_product.price -%}
+    {%- if on_sale -%}
       <span class="product-card-badge">Save {{ card_product.compare_at_price | minus: card_product.price | money_without_trailing_zeros }}</span>
     {%- elsif card_product.available == false -%}
       <span class="product-card-badge">Sold out</span>
     {%- endif -%}
   </div>
-  <h3>{{ card_product.title }}</h3>
+
+  <h3><a class="product-card-link" href="{{ card_product.url }}">{{ card_product.title }}</a></h3>
+
+  {%- if blurb != blank -%}
+    <p class="product-card-blurb">{{ blurb | strip_html | truncatewords: 16 }}</p>
+  {%- endif -%}
+
+  {% render 'rating', rating_product: card_product %}
+
   <div class="product-card-price">
     <span>{{ card_product.price | money }}</span>
-    {%- if card_product.compare_at_price > card_product.price -%}
+    {%- if on_sale -%}
       <s>{{ card_product.compare_at_price | money }}</s>
     {%- endif -%}
   </div>
-</a>
+
+  {%- if card_product.available -%}
+    {%- comment -%}
+      Same data attributes the product page uses, so the existing Ajax cart handler picks
+      this up with no extra JS. Variant products go to the page instead — a card has no
+      room to pick a size or colour, and guessing one is how people get the wrong thing.
+    {%- endcomment -%}
+    {%- if card_product.has_only_default_variant -%}
+      {%- form 'product', card_product, data-product-form: true, class: 'product-card-form' -%}
+        <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id>
+        <div class="quantity-control card-qty" aria-label="Quantity of {{ card_product.title | escape }}">
+          <button type="button" data-qty-decrease aria-label="Decrease quantity">{% render 'icon', name: 'minus', size: 14 %}</button>
+          <output data-qty-output aria-live="polite">1</output>
+          <button type="button" data-qty-increase aria-label="Increase quantity">{% render 'icon', name: 'plus', size: 14 %}</button>
+        </div>
+        <input type="hidden" name="quantity" value="1" data-qty-input>
+        <button type="submit" class="pill-button dark-button card-add" data-add-to-cart>
+          <span data-add-label>Add</span>
+        </button>
+      {%- endform -%}
+    {%- else -%}
+      <a class="pill-button dark-button card-add card-add-options" href="{{ card_product.url }}">Choose options</a>
+    {%- endif -%}
+  {%- else -%}
+    <span class="card-soldout">Sold out</span>
+  {%- endif -%}
+</div>

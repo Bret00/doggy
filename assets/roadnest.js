@@ -217,6 +217,71 @@
     thumbs.forEach(function (thumb, n) { thumb.addEventListener("click", function () { show(n); }); });
   });
 
+  /* ---------- Collection sort ---------- */
+  // The form still submits normally without this; changing the select just saves a click.
+  document.querySelectorAll("[data-sort-form] select").forEach(function (select) {
+    select.addEventListener("change", function () { select.form.submit(); });
+  });
+
+  /* ---------- Collection filter ---------- */
+  document.querySelectorAll("[data-filter-grid]").forEach(function (grid) {
+    var scope = grid.closest(".collection-page") || document;
+    var wrap = scope.querySelector("[data-filter-wrap]");
+    var input = scope.querySelector("[data-filter-input]");
+    var countEl = scope.querySelector("[data-filter-count]");
+    var emptyEl = scope.querySelector("[data-filter-empty]");
+    if (!wrap || !input) return;
+
+    var cards = Array.prototype.slice.call(grid.querySelectorAll("[data-filter-name]"));
+    var total = cards.length;
+    // Only reveal the box once we know it will work — markup ships hidden.
+    wrap.hidden = false;
+
+    function apply() {
+      var term = input.value.trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function (card) {
+        var hit = !term || card.getAttribute("data-filter-name").toLowerCase().indexOf(term) !== -1;
+        card.hidden = !hit;
+        if (hit) shown++;
+      });
+      if (countEl) {
+        countEl.textContent = term
+          ? shown + " of " + total + " product" + (total === 1 ? "" : "s")
+          : total + " product" + (total === 1 ? "" : "s");
+      }
+      if (emptyEl) emptyEl.hidden = shown !== 0;
+    }
+
+    input.addEventListener("input", apply);
+    // Escape clears rather than trapping people behind a filter they can't see.
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { input.value = ""; apply(); }
+    });
+  });
+
+  /* ---------- Header search ---------- */
+  (function () {
+    var form = document.querySelector("[data-search-form]");
+    var openBtn = document.querySelector("[data-search-open]");
+    if (!form || !openBtn) return;
+    var input = form.querySelector("[data-search-input]");
+    var closeBtn = form.querySelector("[data-search-close]");
+
+    function setOpen(open) {
+      document.body.classList.toggle("search-open", open);
+      openBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open && input) input.focus();
+    }
+    openBtn.addEventListener("click", function () { setOpen(true); });
+    closeBtn && closeBtn.addEventListener("click", function () { setOpen(false); });
+    form.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
+    // Don't submit an empty query — /search?q= just renders an empty results page.
+    form.addEventListener("submit", function (e) {
+      if (input && !input.value.trim()) { e.preventDefault(); input.focus(); }
+    });
+  })();
+
   /* ---------- Scroll reveal ---------- */
   if (!reduced.matches && "IntersectionObserver" in window) {
     var revealEls = document.querySelectorAll("[data-reveal]");

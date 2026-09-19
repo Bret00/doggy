@@ -1,0 +1,32 @@
+{%- comment -%}
+  Star rating from the standard `reviews` metafields, which Judge.me writes to.
+
+  Renders nothing at all when there are no reviews. An empty five-star row on a brand new
+  store reads worse than no stars — it looks like everyone rated it zero.
+
+  Accepts: rating_product, and optional compact (true = stars only, no count text).
+{%- endcomment -%}
+{%- liquid
+  assign rating = rating_product.metafields.reviews.rating.value
+  assign count = rating_product.metafields.reviews.rating_count.value | default: 0
+-%}
+{%- if rating != blank and count > 0 -%}
+  {%- assign scale = rating.scale_max | default: 5 -%}
+  {%- assign score = rating.rating | times: 1.0 -%}
+  {%- assign percent = score | divided_by: scale | times: 100 -%}
+  <div class="rating" role="img" aria-label="{{ score }} out of {{ scale }} stars, {{ count }} review{% if count != 1 %}s{% endif %}">
+    {%- comment -%}
+      Two identical star rows: a grey one underneath, a gold one on top clipped to the
+      score. That gives real fractional stars (4.3 shows as 4.3) without needing
+      half-star glyphs, and the whole thing is one element to style.
+    {%- endcomment -%}
+    <span class="rating-stars" style="--rating-fill: {{ percent }}%;" aria-hidden="true">
+      <span class="rating-stars-empty">★★★★★</span>
+      <span class="rating-stars-full">★★★★★</span>
+    </span>
+    {%- unless compact -%}
+      <span class="rating-score">{{ score | round: 1 }}</span>
+      <span class="rating-count">({{ count }})</span>
+    {%- endunless -%}
+  </div>
+{%- endif -%}

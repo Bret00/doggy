@@ -1,3 +1,6 @@
+{%- liquid
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+-%}
 <section class="collection-page">
   <header class="page-header">
     {%- if section.settings.eyebrow != blank -%}
@@ -12,11 +15,49 @@
 
   {%- paginate collection.products by 24 -%}
     {%- if collection.products.size > 0 -%}
-      <div class="product-grid">
+      <div class="collection-toolbar">
+        <p class="collection-count" data-filter-count>
+          {{ collection.products_count }} product{% if collection.products_count != 1 %}s{% endif %}
+        </p>
+
+        <div class="collection-tools">
+          {%- comment -%}
+            Typing filters the products already on the page. With a catalogue this size
+            everything fits in one page, so this is instant and needs no round trip. It is
+            hidden when JS is off, since without JS the box would do nothing.
+          {%- endcomment -%}
+          <div class="collection-filter" data-filter-wrap hidden>
+            <label class="visually-hidden" for="CollectionFilter">Filter these products</label>
+            <input type="search" id="CollectionFilter" placeholder="Filter these products" autocomplete="off" data-filter-input>
+          </div>
+
+          {%- if collection.sort_options.size > 0 -%}
+            <form method="get" class="collection-sort" data-sort-form>
+              {%- comment -%} Keep any active filter/pagination params when sorting. {%- endcomment -%}
+              {%- for param in request.url_params -%}
+                {%- unless param.first == 'sort_by' or param.first == 'page' -%}
+                  <input type="hidden" name="{{ param.first | escape }}" value="{{ param.last | escape }}">
+                {%- endunless -%}
+              {%- endfor -%}
+              <label for="SortBy">Sort by</label>
+              <select name="sort_by" id="SortBy">
+                {%- for option in collection.sort_options -%}
+                  <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+                {%- endfor -%}
+              </select>
+              <noscript><button type="submit">Apply</button></noscript>
+            </form>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="product-grid" data-filter-grid>
         {%- for product in collection.products -%}
           {%- render 'product-card', card_product: product -%}
         {%- endfor -%}
       </div>
+
+      <p class="collection-noresults" data-filter-empty hidden>Nothing matches that. Clear the box to see everything again.</p>
 
       {%- if paginate.pages > 1 -%}
         <nav class="collection-pagination" aria-label="Pagination">
@@ -25,6 +66,8 @@
           {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Next &rarr;</a>{%- endif -%}
         </nav>
       {%- endif -%}
+
+      {% render 'trust-strip' %}
     {%- else -%}
       <div class="collection-empty">
         <p>{{ section.settings.empty_text }}</p>
