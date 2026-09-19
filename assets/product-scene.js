@@ -370,7 +370,6 @@ function mountScene(container, mode) {
   let animation = 0;
   let lastFrame = 0;
   const clamp = (x) => Math.max(0, Math.min(1, x));
-  const smoothstep = (x) => { x = clamp(x); return x * x * (3 - 2 * x); };
 
   function draw(time) {
     animation = requestAnimationFrame(draw);
@@ -378,17 +377,10 @@ function mountScene(container, mode) {
     lastFrame = time;
     let progress = 0, explode = 0, tilt = 0;
     if (mode === "story" && story) {
-      const r = story.getBoundingClientRect();
-      progress = clamp(-r.top / (story.offsetHeight - innerHeight));
-      // Turns on its own so the product is always moving. At the old rate a full turn took
-      // 22s, which reads as frozen next to the hero — that one visibly rotates as you
-      // scroll past it, so this one looked broken by comparison. ~9s a turn is clearly
-      // moving at a glance. The exploded view still follows scroll; it belongs to a chapter.
-      targetY = reduced.matches
-        ? -0.48 + smoothstep(progress / 0.28) * 1.0 + smoothstep((progress - 0.48) / 0.28) * 1.7 + smoothstep((progress - 0.77) / 0.23) * 3.25
-        : -0.48 + time * 0.0007;
-      explode = smoothstep((progress - 0.23) / 0.1) * (1 - smoothstep((progress - 0.45) / 0.12));
-      tilt = explode * 0.15;
+      // Purely self-driven: one steady turn, roughly 9 seconds each. Scroll deliberately
+      // does nothing to this model — no rotation, no tilt, and no pulling apart — because
+      // scroll-linked motion read as "it only moves if I drag the page".
+      targetY = reduced.matches ? -0.48 : -0.48 + time * 0.0007;
     } else if (hero) {
       const r = hero.getBoundingClientRect();
       progress = clamp(-r.top / r.height);
