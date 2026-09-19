@@ -64,6 +64,12 @@
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
       <h2 id="shop-title">{{ product.title }}</h2>
 
+      {%- comment -%}
+        Stars sit above the price, where people look for them. Renders nothing until there
+        are real reviews — see snippets/rating.liquid.
+      {%- endcomment -%}
+      {% render 'rating', rating_product: product %}
+
       <div class="product-price" data-product-price>
         <span data-price>{{ current_variant.price | money }}</span>
         {%- if current_variant.compare_at_price > current_variant.price -%}
@@ -129,6 +135,8 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
+
+      {% render 'trust-strip' %}
 
       {%- comment -%} app blocks, e.g. the Judge.me review widget {%- endcomment -%}
       {%- for block in section.blocks -%}

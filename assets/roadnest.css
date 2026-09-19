@@ -115,6 +115,11 @@ footer .brand-dot,.navigation-sheet .brand-dot{color:#d9c3a5}
 .payment-icons{display:flex;flex-wrap:wrap;gap:7px;list-style:none;margin:0;padding:0}
 .payment-icons svg{height:23px;width:auto;display:block;border-radius:3px}
 
+/* Inside the product column the strip is a narrow stack, not a full-width page row, so
+   drop the page gutters and let the two groups sit on top of each other. */
+.shop-copy .trust-strip{max-width:none;margin:26px 0 0;padding:20px 0 0;flex-direction:column;align-items:flex-start;gap:16px}
+.shop-copy .trust-points{flex-direction:column;gap:9px}
+
 /* Header search: an icon until opened, then it takes the nav's place rather than
    squeezing in beside it. */
 .header-search{display:none;align-items:center;gap:6px}
