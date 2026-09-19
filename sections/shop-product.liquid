@@ -14,9 +14,24 @@
     <div class="product-gallery" data-reveal>
       <div class="gallery-main">
         <span class="gallery-tag">{{ section.settings.gallery_tag }}</span>
-        {%- if product.images.size > 0 -%}
-          {%- for image in product.images -%}
-            <img src="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" data-gallery-image {% unless forloop.first %}hidden{% endunless %}>
+        {%- comment -%}
+          Loop media, not images: a product video is media but not an image, so looping
+          images silently dropped it from the gallery and undercounted the position label.
+        {%- endcomment -%}
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            {%- assign preview = media.preview_image -%}
+            {%- if media.media_type == 'image' -%}
+              <img src="{{ preview | image_url: width: 1200 }}" alt="{{ media.alt | default: product.title | escape }}" width="{{ preview.width }}" height="{{ preview.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" data-gallery-image {% unless forloop.first %}hidden{% endunless %}>
+            {%- else -%}
+              <div class="gallery-media" data-gallery-image {% unless forloop.first %}hidden{% endunless %}>
+                {%- if media.media_type == 'video' -%}
+                  {{ media | video_tag: controls: true, preload: 'metadata', image_size: '1200x' }}
+                {%- else -%}
+                  {{ media | media_tag: image_size: '1200x' }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           {%- endfor -%}
         {%- else -%}
           <div class="media-placeholder media-placeholder-lg" role="img" aria-label="Photo coming soon for {{ product.title | escape }}">
@@ -26,16 +41,19 @@
         {%- endif -%}
         <div class="gallery-controls">
           <button type="button" data-gallery-prev aria-label="Previous product image">{% render 'icon', name: 'chevron-left', size: 20 %}</button>
-          {%- assign gallery_total = product.images.size | at_least: 1 -%}
+          {%- assign gallery_total = product.media.size | at_least: 1 -%}
           <span data-gallery-position>01 / {% if gallery_total < 10 %}0{% endif %}{{ gallery_total }}</span>
           <button type="button" data-gallery-next aria-label="Next product image">{% render 'icon', name: 'chevron-right', size: 20 %}</button>
         </div>
       </div>
-      {%- if product.images.size > 1 -%}
+      {%- if product.media.size > 1 -%}
         <div class="gallery-thumbnails">
-          {%- for image in product.images -%}
-            <button type="button" data-gallery-thumb="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}" aria-label="Show product image {{ forloop.index }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
-              <img src="{{ image | image_url: width: 160 }}" alt="" width="76" height="76" loading="lazy">
+          {%- for media in product.media -%}
+            {%- assign is_video = false -%}
+            {%- if media.media_type != 'image' -%}{%- assign is_video = true -%}{%- endif -%}
+            <button type="button" data-gallery-thumb="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}{% if is_video %} thumb-video{% endif %}" aria-label="Show {% if is_video %}product video{% else %}product image{% endif %} {{ forloop.index }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+              <img src="{{ media.preview_image | image_url: width: 160 }}" alt="" width="76" height="76" loading="lazy">
+              {%- if is_video -%}<span class="thumb-play" aria-hidden="true">{% render 'icon', name: 'play', size: 14 %}</span>{%- endif -%}
             </button>
           {%- endfor -%}
         </div>

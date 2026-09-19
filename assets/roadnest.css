@@ -59,6 +59,19 @@ footer .brand-dot,.navigation-sheet .brand-dot{color:#d9c3a5}
 .media-placeholder-lg img{width:84px;height:84px}
 .media-placeholder-lg span{font-size:13px}
 
+.gallery-main [data-gallery-image]{position:absolute;inset:0}
+.gallery-main [data-gallery-image][hidden]{display:none}
+.gallery-media,.gallery-media video,.gallery-media img{width:100%;height:100%;object-fit:cover}
+.gallery-media video{display:block;background:#2a251f}
+.gallery-thumbnails>button{position:relative}
+/* Play badge sits over the video thumbnail so it reads as a video before it's clicked.
+   White glyph on a dark scrim rather than on the photo, which can be any brightness. */
+.thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(33,28,22,.34);border-radius:2px;pointer-events:none}
+/* The browser draws its own control bar along the bottom of a video, right where the
+   gallery's prev/next/counter sits. Lift the gallery row clear while a video slide is
+   showing. Browsers without :has() just keep the old position. */
+.gallery-main:has(.gallery-media:not([hidden])) .gallery-controls{bottom:62px}
+
 .page-header{max-width:1180px;margin:0 auto;padding:clamp(60px,7vw,104px) 7% 0}
 .page-header .eyebrow{color:#7d7263}
 .page-header h1{font-family:var(--font-display);font-size:clamp(38px,5vw,70px);letter-spacing:-.048em;line-height:1.02;font-weight:600;margin:24px 0 0}

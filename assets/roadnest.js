@@ -197,7 +197,15 @@
     function show(i) {
       if (!images.length) return;
       index = (i + images.length) % images.length;
-      images.forEach(function (img, n) { img.hidden = n !== index; });
+      images.forEach(function (img, n) {
+        img.hidden = n !== index;
+        // A slide can hold a video. Hiding it doesn't stop playback, so audio would keep
+        // running from a slide nobody can see.
+        if (n !== index) {
+          var vid = img.matches("video") ? img : img.querySelector("video");
+          if (vid && !vid.paused) vid.pause();
+        }
+      });
       thumbs.forEach(function (t, n) { t.classList.toggle("active", n === index); t.setAttribute("aria-pressed", n === index); });
       if (positionEl) {
         var total = images.length;
