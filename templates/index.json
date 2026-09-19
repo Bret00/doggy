@@ -9,9 +9,9 @@
         "heading_line2": "for the back seat.",
         "subtext": "A platform that fills the footwell, so your dog rides on one level surface — no sliding, no drop behind your seat.",
         "cta_text": "Shop RoadNest",
-        "cta_link": "#shop",
+        "cta_link": "/collections/shop-all",
         "secondary_text": "See how it works",
-        "secondary_link": "#design",
+        "secondary_link": "/pages/design",
         "note_text": "Waterproof. Wipes clean in two minutes.",
         "product_index": "NO. 01 / THE FLAT-BED PLATFORM",
         "floating_label": "FILLS THE FOOTWELL · NO SLIDING",
@@ -20,66 +20,17 @@
         "bottom_line2": "30-DAY GUARANTEE."
       }
     },
-    "feature-strip": {
-      "type": "feature-strip",
-      "blocks": {
-        "feature-1": {
-          "type": "feature",
-          "settings": {
-            "icon": "layers-3",
-            "label": "Fills the footwell"
-          }
-        },
-        "feature-2": {
-          "type": "feature",
-          "settings": {
-            "icon": "droplets",
-            "label": "Genuinely waterproof"
-          }
-        },
-        "feature-3": {
-          "type": "feature",
-          "settings": {
-            "icon": "maximize-2",
-            "label": "One flat surface"
-          }
-        },
-        "feature-4": {
-          "type": "feature",
-          "settings": {
-            "icon": "wind",
-            "label": "Mesh side windows"
-          }
-        }
-      },
-      "block_order": [
-        "feature-1",
-        "feature-2",
-        "feature-3",
-        "feature-4"
-      ],
-      "settings": {}
-    },
-    "intro": {
-      "type": "intro",
+    "lifestyle": {
+      "type": "lifestyle",
       "settings": {
-        "anchor_id": "",
-        "eyebrow": "BUILT AROUND YOUR DOG'S BODY",
-        "heading_line1": "A normal cover just drapes over the bench.",
-        "heading_line2": "Your dog still slides into the footwell.",
-        "body": "RoadNest drops a padded panel into that gap and turns the whole back seat into one flat bed."
-      }
-    },
-    "featured-products": {
-      "type": "featured-products",
-      "settings": {
-        "anchor_id": "shop",
-        "collection": "shop-all",
-        "product_limit": 4,
-        "eyebrow": "EVERYTHING FOR THE BACK SEAT",
-        "heading_line1": "Built around",
-        "heading_line2": "the back seat.",
-        "link_text": "See everything"
+        "anchor_id": "life",
+        "eyebrow": "IT COVERS MORE THAN THE BENCH",
+        "heading_line1": "Nothing gets through",
+        "heading_line2": "to your interior.",
+        "body": "Covers the seat backs, both inner doors, and the floor — not just the bench.",
+        "cta_text": "Shop RoadNest",
+        "cta_link": "/products/flat-bed-dog-car-platform",
+        "bottom_text": "FITS MOST SUVS, TRUCKS AND WAGONS."
       }
     },
     "closing-banner": {
@@ -87,15 +38,13 @@
       "settings": {
         "eyebrow": "30-DAY MONEY-BACK GUARANTEE",
         "text": "Try it for a month.",
-        "link": "#shop"
+        "link": "/collections/shop-all"
       }
     }
   },
   "order": [
     "hero",
-    "feature-strip",
-    "intro",
-    "featured-products",
+    "lifestyle",
     "closing-banner"
   ]
 }

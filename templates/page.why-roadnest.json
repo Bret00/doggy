@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "eyebrow": "WHY ROADNEST",
+        "show_cta": false
+      }
+    },
+    "intro": {
+      "type": "intro",
+      "settings": {
+        "anchor_id": "",
+        "eyebrow": "BUILT AROUND YOUR DOG'S BODY",
+        "heading_line1": "A normal cover just drapes over the bench.",
+        "heading_line2": "Your dog still slides into the footwell.",
+        "body": "RoadNest drops a padded panel into that gap and turns the whole back seat into one flat bed."
+      }
+    },
+    "closing-banner": {
+      "type": "closing-banner",
+      "settings": {
+        "eyebrow": "30-DAY MONEY-BACK GUARANTEE",
+        "text": "Try it for a month.",
+        "link": "/collections/shop-all"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "intro",
+    "closing-banner"
+  ]
+}
