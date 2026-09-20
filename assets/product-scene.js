@@ -211,10 +211,14 @@ function mountScene(container, mode) {
   box(4.86, 0.07, 0.095, 0, 1.4, 1.37, band);
   box(1.45, 0.065, 0.095, 0, 0.03, 1.37, band);
   for (const x of [-0.73, 0.73]) box(0.06, 1.42, 0.09, x, 0.68, 1.37, band);
+  // Storage pockets, on the INSIDE face of the front wall. They used to sit at z 1.455,
+  // past that wall's outer face at 1.4025 — hanging off the outside of the bed, where
+  // nothing could ever fall into them. Mirrored inward so the openings face the platform;
+  // the pocket's back now sits flush against the inside of the wall at 1.3375.
   for (const x of [1.03, 1.93]) {
-    box(0.72, 0.62, 0.135, x, 0.4, 1.455, leather, upper, 0.06);
-    box(0.72, 0.045, 0.13, x, 0.7, 1.47, band);
-    cord([[x - 0.31, 0.67, 1.53], [x - 0.31, 0.12, 1.53], [x + 0.31, 0.12, 1.53], [x + 0.31, 0.67, 1.53]], thread, 0.006);
+    box(0.72, 0.62, 0.135, x, 0.4, 1.27, leather, upper, 0.06);
+    box(0.72, 0.045, 0.13, x, 0.7, 1.255, band);
+    cord([[x - 0.31, 0.67, 1.195], [x - 0.31, 0.12, 1.195], [x + 0.31, 0.12, 1.195], [x + 0.31, 0.67, 1.195]], thread, 0.006);
   }
   for (const z of [-1.36, 1.37])
     for (const x of [-1.96, -1.16, 1.16, 1.96]) {
@@ -317,8 +321,14 @@ function mountScene(container, mode) {
   // Two passengers, kept in the open middle of the bed: anything tucked toward the near
   // wall gets hidden behind the side panel and straps from the hero camera angle.
   // Darker coats now the bed is cream, or they vanish into it.
+  //
+  // The second dog faces front rather than across the bed. Angled at 2.55 it reached out
+  // to x -2.78 against a side wall whose inside face is at -2.3625, so its head passed
+  // straight through the panel. Turning it a quarter turn brings the whole body inside
+  // without moving it off its spot — its reach now runs along the bed instead of into
+  // the wall. Bounds after the change: x -2.27 to -1.57, z -1.22 to 0.64.
   makeDog({ x: -0.35, z: 0.3, ry: 0.24, scale: 1.24, fur: 0x7a5636, cream: 0xefe4d0, collar: 0x3f5147 });
-  makeDog({ x: -1.92, z: -0.22, ry: 2.55, scale: 0.86, fur: 0x585349, cream: 0xe7ddca, collar: 0xb5825a });
+  makeDog({ x: -1.94, z: -0.22, ry: Math.PI / 2, scale: 0.86, fur: 0x585349, cream: 0xe7ddca, collar: 0xb5825a });
 
   const shadow = new T.Mesh(new T.PlaneGeometry(35, 35), new T.ShadowMaterial({ opacity: 0.15 }));
   shadow.rotation.x = -Math.PI / 2;
