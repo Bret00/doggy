@@ -22,13 +22,62 @@
       "settings": {
         "eyebrow": "30-DAY MONEY-BACK GUARANTEE",
         "text": "Try it for a month.",
-        "link": "/collections/shop-all"
+        "link": "/products/flat-bed-dog-car-platform"
+      }
+    },
+    "details": {
+      "type": "details",
+      "blocks": {
+        "d1": {
+          "type": "detail",
+          "settings": {
+            "title": "The footwell is the actual problem.",
+            "text": "A cover that drapes over the bench leaves the gap in front of it open. That is where a dog slides on a hard stop, and where an older or bigger dog struggles to get comfortable in the first place.",
+            "icon": "layers-3"
+          }
+        },
+        "d2": {
+          "type": "detail",
+          "settings": {
+            "title": "Waterproof usually means sprayed on.",
+            "text": "Most covers in this price range use a surface coating that stops working after a month of wet dogs. Ours is a bonded inner layer — it is part of the fabric, not painted onto it.",
+            "icon": "droplets"
+          }
+        },
+        "d3": {
+          "type": "detail",
+          "settings": {
+            "title": "Covered does not have to mean boxed in.",
+            "text": "Hammock covers put a wall between your dog and the rest of the car. Mesh side windows keep the air moving and let your dog see out, and let you see your dog.",
+            "icon": "wind"
+          }
+        },
+        "d4": {
+          "type": "detail",
+          "settings": {
+            "title": "What it is not.",
+            "text": "It is not a crash-tested restraint, and we will not pretend otherwise. It protects your interior and gives your dog a flat surface to lie on. For crash protection you want a proper harness or a crate.",
+            "icon": "paw-print"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "settings": {
+        "eyebrow": "WHERE OTHER COVERS STOP",
+        "heading_line1": "Four things",
+        "heading_line2": "we did differently."
       }
     }
   },
   "order": [
     "main",
     "intro",
+    "details",
     "closing-banner"
   ]
 }
