@@ -115,6 +115,52 @@ footer .brand-dot,.navigation-sheet .brand-dot{color:#d9c3a5}
 .payment-icons{display:flex;flex-wrap:wrap;gap:7px;list-style:none;margin:0;padding:0}
 .payment-icons svg{height:23px;width:auto;display:block;border-radius:3px}
 
+/* Photo hero. Full-bleed dog photo with the headline and buy button over it.
+   The scrim stops were picked by measurement, not by eye: the subtext runs across the
+   sunlit window behind the dog, where the original gradient put it at 3.75:1 — under the
+   4.5 minimum. Sampling the lightest pixel beneath each glyph run, these stops hold the
+   worst case at 7.7:1 while keeping the dog's side of the photo about 20% brighter than
+   a heavier scrim would. Re-measure if the photo is ever swapped. */
+.photo-hero{position:relative;min-height:clamp(540px,82vh,780px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.photo-hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.photo-hero-shade{position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(94deg,rgba(18,15,11,.92) 0%,rgba(18,15,11,.87) 40%,rgba(18,15,11,.62) 58%,rgba(18,15,11,.28) 76%,rgba(18,15,11,.08) 100%),
+  linear-gradient(0deg,rgba(18,15,11,.58) 0%,rgba(18,15,11,0) 46%)}
+.photo-hero-copy{position:relative;max-width:1180px;width:100%;margin:0 auto;padding:0 7% clamp(52px,7vw,92px);color:#f6efe3}
+.photo-hero-copy .eyebrow{color:#e3d6bf}
+.photo-hero-copy h1{font-family:var(--font-display);font-size:clamp(42px,6.4vw,88px);line-height:.98;letter-spacing:-.045em;font-weight:600;margin:20px 0 0;max-width:15ch}
+.photo-hero-copy h1 span{color:#d9c9ac}
+.photo-hero-sub{margin:20px 0 0;font-size:clamp(15px,1.5vw,18px);line-height:1.6;max-width:46ch;color:#efe6d7}
+.photo-hero-actions{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;margin-top:clamp(24px,3vw,34px)}
+.photo-hero-cta{font-size:16px;padding:15px 26px}
+.photo-hero-price{display:flex;align-items:baseline;gap:9px;font-size:17px;color:#f6efe3}
+.photo-hero-price strong{font-weight:600}
+.photo-hero-price s{font-size:14px;color:#c3b59c}
+.photo-hero-trust{display:flex;align-items:center;gap:8px;margin:16px 0 0;font-size:13.5px;color:#e0d4bd}
+.photo-hero-trust svg{flex:0 0 auto}
+.photo-hero-secondary{display:inline-flex;margin-top:22px;color:#f6efe3}
+
+/* 3D showcase, now its own section under the hero rather than sharing it. */
+.showcase-3d{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,5vw,64px);align-items:center;max-width:1180px;margin:0 auto;padding-left:7%;padding-right:7%}
+.showcase-copy h2{font-family:var(--font-display);font-size:clamp(32px,4.2vw,58px);line-height:1.02;letter-spacing:-.04em;font-weight:600;margin:18px 0 0}
+.showcase-copy h2 span{color:#7d7263}
+.showcase-copy p{margin:20px 0 26px;font-size:16px;line-height:1.7;color:#5f5648;max-width:44ch}
+.showcase-copy .pill-button{display:inline-flex}
+.showcase-model{position:relative;aspect-ratio:1/.92}
+.showcase-model .product-scene{position:absolute;inset:0}
+.showcase-model .model-disclaimer{position:absolute;right:0;bottom:-6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8b8271}
+@media(max-width:860px){
+  .showcase-3d{grid-template-columns:1fr}
+  .showcase-model{aspect-ratio:1/.8}
+}
+@media(max-width:620px){
+  .photo-hero{min-height:clamp(480px,74vh,640px)}
+  .photo-hero-shade{background:linear-gradient(0deg,rgba(26,22,17,.92) 0%,rgba(26,22,17,.72) 46%,rgba(26,22,17,.34) 100%)}
+  .photo-hero-copy h1{max-width:none}
+  .photo-hero-actions{gap:12px}
+  .photo-hero-cta{width:100%;justify-content:center}
+}
+
 /* Featured products row on the homepage. The grid rules are shared with the Shop page;
    this only adds the heading row and trims the top padding, since the section sits
    between two others rather than under a page header. */

@@ -1,36 +1,30 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero",
+    "hero-photo": {
+      "type": "hero-photo",
       "settings": {
-        "product": "",
+        "product": "flat-bed-dog-car-platform",
         "eyebrow": "THE FLAT-BED DOG PLATFORM",
         "heading_line1": "One flat bed",
         "heading_line2": "for the back seat.",
-        "subtext": "A platform that fills the footwell, so your dog rides on one level surface — no sliding, no drop behind your seat.",
-        "cta_text": "Shop RoadNest",
-        "cta_link": "/collections/shop-all",
+        "subtext": "Fills the footwell so your dog rides on one level surface — no sliding, no drop behind your seat.",
+        "cta_text": "Shop the platform",
+        "show_price": true,
+        "trust_line": "Free shipping across Canada · 30-day money-back guarantee",
         "secondary_text": "See how it works",
-        "secondary_link": "/pages/design",
-        "note_text": "Waterproof. Wipes clean in two minutes.",
-        "product_index": "NO. 01 / THE FLAT-BED PLATFORM",
-        "floating_label": "FILLS THE FOOTWELL · NO SLIDING",
-        "side_label": "ONE LEVEL SURFACE.",
-        "bottom_line1": "FITS MOST SUVS AND TRUCKS.",
-        "bottom_line2": "30-DAY GUARANTEE."
+        "secondary_link": "#how"
       }
     },
-    "lifestyle": {
-      "type": "lifestyle",
+    "showcase-3d": {
+      "type": "showcase-3d",
       "settings": {
-        "anchor_id": "life",
-        "eyebrow": "IT COVERS MORE THAN THE BENCH",
-        "heading_line1": "Nothing gets through",
-        "heading_line2": "to your interior.",
-        "body": "Covers the seat backs, both inner doors, and the floor — not just the bench.",
-        "cta_text": "Shop RoadNest",
-        "cta_link": "/products/flat-bed-dog-car-platform",
-        "bottom_text": "FITS MOST SUVS, TRUCKS AND WAGONS."
+        "anchor_id": "how",
+        "product": "flat-bed-dog-car-platform",
+        "eyebrow": "TURN IT AROUND",
+        "heading_line1": "Have a proper",
+        "heading_line2": "look at it.",
+        "body": "Drag to spin it. The panel drops into the footwell, the sides zip closed, and the whole back seat becomes one flat surface.",
+        "cta_text": "See the full spec"
       }
     },
     "closing-banner": {
@@ -38,13 +32,13 @@
       "settings": {
         "eyebrow": "30-DAY MONEY-BACK GUARANTEE",
         "text": "Try it for a month.",
-        "link": "/collections/shop-all"
+        "link": "/products/flat-bed-dog-car-platform"
       }
     }
   },
   "order": [
-    "hero",
-    "lifestyle",
+    "hero-photo",
+    "showcase-3d",
     "closing-banner"
   ]
 }

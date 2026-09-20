@@ -1,0 +1,55 @@
+{%- comment -%}
+  The 3D model on its own, below the photo hero. It used to share the hero with the
+  headline; now the photo carries the headline and this gets the space to itself.
+
+  Keeps the drag hint and reset button, since a model nobody realises is interactive is
+  just a slow-loading picture.
+{%- endcomment -%}
+<section class="showcase-3d section-pad" {% if section.settings.anchor_id != blank %}id="{{ section.settings.anchor_id }}"{% endif %} aria-labelledby="showcase-3d-title">
+  <div class="showcase-copy" data-reveal>
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h2 id="showcase-3d-title">
+      {{ section.settings.heading_line1 }}
+      {%- if section.settings.heading_line2 != blank -%}
+        <br><span>{{ section.settings.heading_line2 }}</span>
+      {%- endif -%}
+    </h2>
+    {%- if section.settings.body != blank -%}
+      <p>{{ section.settings.body }}</p>
+    {%- endif -%}
+    {%- if section.settings.cta_text != blank -%}
+      <a class="pill-button dark-button" href="{% if section.settings.product != blank %}{{ section.settings.product.url }}{% else %}{{ section.settings.cta_link }}{% endif %}">
+        {{ section.settings.cta_text }} {% render 'icon', name: 'arrow-up-right', size: 18 %}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="showcase-model">
+    <div class="hero-halo" aria-hidden="true"></div>
+    {%- render 'product-scene', mode: 'hero', fallback_image: section.settings.product.featured_image -%}
+    <div class="product-interaction">
+      <span>{% render 'icon', name: 'rotate-ccw', size: 14 %} Drag to take a look</span>
+      <button type="button" data-scene-reset aria-label="Reset product rotation">{% render 'icon', name: 'rotate-ccw', size: 18 %}</button>
+    </div>
+    <span class="model-disclaimer">3D product illustration</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "3D showcase",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "how" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "TURN IT AROUND" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Have a proper" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "look at it." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Drag to spin it. The panel drops into the footwell, the sides zip closed, and the whole back seat becomes one flat surface." },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "See the full spec" },
+    { "type": "url", "id": "cta_link", "label": "Button link (used only if no product is set)" }
+  ],
+  "presets": [{ "name": "3D showcase" }]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+{%- comment -%}
+  Photo hero: the dog in the car, with the headline and the buy button over it.
+
+  The price sits next to the button on purpose. Someone landing here decides in a couple of
+  seconds, and hiding the price behind a click is the most common reason they don't take
+  that click.
+{%- endcomment -%}
+{%- liquid
+  assign hero_product = section.settings.product
+  assign hero_image = section.settings.image
+-%}
+<section class="photo-hero" aria-labelledby="photo-hero-title">
+  {%- if hero_image != blank -%}
+    <img class="photo-hero-image"
+         src="{{ hero_image | image_url: width: 2000 }}"
+         alt="{{ hero_image.alt | default: section.settings.heading_line1 | escape }}"
+         width="{{ hero_image.width }}" height="{{ hero_image.height }}"
+         loading="eager" fetchpriority="high">
+  {%- else -%}
+    <img class="photo-hero-image"
+         src="{{ 'lifestyle.webp' | asset_url }}"
+         alt="A dog lying on the RoadNest flat-bed platform in the back seat of a car"
+         width="1600" height="1067" loading="eager" fetchpriority="high">
+  {%- endif -%}
+
+  <div class="photo-hero-shade" aria-hidden="true"></div>
+
+  <div class="photo-hero-copy">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow"><span class="tiny-cross">+</span> {{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+
+    <h1 id="photo-hero-title">
+      {{ section.settings.heading_line1 }}
+      {%- if section.settings.heading_line2 != blank -%}
+        <br><span>{{ section.settings.heading_line2 }}</span>
+      {%- endif -%}
+    </h1>
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="photo-hero-sub">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+
+    <div class="photo-hero-actions">
+      <a class="pill-button accent-button photo-hero-cta"
+         href="{% if hero_product != blank %}{{ hero_product.url }}{% else %}{{ section.settings.cta_link }}{% endif %}">
+        {{ section.settings.cta_text }} {% render 'icon', name: 'arrow-up-right', size: 19 %}
+      </a>
+
+      {%- if hero_product != blank and section.settings.show_price -%}
+        <span class="photo-hero-price">
+          <strong>{{ hero_product.price | money }}</strong>
+          {%- if hero_product.compare_at_price > hero_product.price -%}
+            <s>{{ hero_product.compare_at_price | money }}</s>
+          {%- endif -%}
+        </span>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.trust_line != blank -%}
+      <p class="photo-hero-trust">{% render 'icon', name: 'check', size: 15 %} {{ section.settings.trust_line }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.secondary_text != blank -%}
+      <a class="text-link photo-hero-secondary" href="{{ section.settings.secondary_link }}">
+        {{ section.settings.secondary_text }} {% render 'icon', name: 'arrow-down', size: 16 %}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Photo hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background photo" },
+    { "type": "product", "id": "product", "label": "Product (sets the button link and price)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE FLAT-BED DOG PLATFORM" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "One flat bed" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "for the back seat." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Fills the footwell so your dog rides on one level surface — no sliding, no drop behind your seat." },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "Shop the platform" },
+    { "type": "url", "id": "cta_link", "label": "Button link (used only if no product is set)" },
+    { "type": "checkbox", "id": "show_price", "label": "Show the price beside the button", "default": true },
+    { "type": "text", "id": "trust_line", "label": "Trust line under the button", "default": "Free shipping across Canada · 30-day money-back guarantee" },
+    { "type": "text", "id": "secondary_text", "label": "Secondary link text", "default": "See how it works" },
+    { "type": "text", "id": "secondary_link", "label": "Secondary link", "default": "#how" }
+  ],
+  "presets": [{ "name": "Photo hero" }]
+}
+{% endschema %}
