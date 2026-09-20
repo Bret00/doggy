@@ -16,6 +16,8 @@
     <meta name="description" content="{{ page_description | escape }}">
   {%- endif -%}
 
+  {% render 'structured-data' %}
+
   {{ content_for_header }}
 
   {{ 'body.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
