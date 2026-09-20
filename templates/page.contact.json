@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "eyebrow": "CONTACT & HELP",
+        "show_cta": false
+      }
+    },
+    "closing-banner": {
+      "type": "closing-banner",
+      "settings": {
+        "eyebrow": "30-DAY MONEY-BACK GUARANTEE",
+        "text": "Try it for a month.",
+        "link": "/products/flat-bed-dog-car-platform"
+      }
+    }
+  },
+  "order": ["main", "closing-banner"]
+}

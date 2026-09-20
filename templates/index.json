@@ -34,11 +34,25 @@
         "text": "Try it for a month.",
         "link": "/products/flat-bed-dog-car-platform"
       }
+    },
+    "lifestyle": {
+      "type": "lifestyle",
+      "settings": {
+        "anchor_id": "life",
+        "eyebrow": "IT COVERS MORE THAN THE BENCH",
+        "heading_line1": "Nothing gets through",
+        "heading_line2": "to your interior.",
+        "body": "Covers the seat backs, both inner doors, and the floor — not just the bench.",
+        "cta_text": "Shop RoadNest",
+        "cta_link": "/products/flat-bed-dog-car-platform",
+        "bottom_text": "FITS MOST SUVS, TRUCKS AND WAGONS."
+      }
     }
   },
   "order": [
     "hero-photo",
     "showcase-3d",
+    "lifestyle",
     "closing-banner"
   ]
 }
