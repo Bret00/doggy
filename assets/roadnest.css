@@ -173,6 +173,15 @@ footer .brand-dot,.navigation-sheet .brand-dot{color:#d9c3a5}
 .featured-empty{max-width:1180px;margin:0 auto;padding:30px 7%;color:#6a6152}
 @media(max-width:600px){.featured-head{align-items:flex-start}.featured-head h2{margin-top:12px}}
 
+/* Full product description below the buy box. The rich-text rules come from .page-body,
+   which the content pages already use, so only the section heading needs styling here. */
+.product-description{padding-top:clamp(46px,5vw,72px)}
+.product-description-head{max-width:1180px;margin:0 auto;padding:0 7%}
+.product-description-head h2{font-family:var(--font-display);font-size:clamp(28px,3.6vw,46px);letter-spacing:-.04em;line-height:1.05;font-weight:600;margin:16px 0 0}
+.product-description-head h2 span{color:#7d7263}
+.product-description-body{padding-top:clamp(22px,2.6vw,32px)}
+.product-description-body>*:first-child{margin-top:0}
+
 /* Search results page */
 .search-page-form{max-width:1180px;margin:0 auto;padding:clamp(26px,3vw,36px) 7% 0}
 .search-page-form form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}

@@ -1,0 +1,40 @@
+{%- comment -%}
+  The full product description.
+
+  The buy box only ever showed a 40-word, HTML-stripped summary, so everything below the
+  first couple of sentences — the fit breakdown, the install steps, the specifications
+  table — was saved in Shopify and invisible to customers. This renders it properly.
+
+  Reuses the .page-body rich-text styles the content pages already use, so headings,
+  lists and tables match the rest of the site instead of falling back to browser defaults.
+{%- endcomment -%}
+{%- if product.description != blank -%}
+  <section class="product-description section-pad" aria-labelledby="product-description-title">
+    <header class="product-description-head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 id="product-description-title">
+        {{ section.settings.heading_line1 }}
+        {%- if section.settings.heading_line2 != blank -%}
+          <br><span>{{ section.settings.heading_line2 }}</span>
+        {%- endif -%}
+      </h2>
+    </header>
+    <div class="page-body rte product-description-body" data-reveal>
+      {{ product.description }}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product description",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE FULL DETAIL" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Everything" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "about it." }
+  ],
+  "presets": [{ "name": "Product description" }]
+}
+{% endschema %}
