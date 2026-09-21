@@ -96,10 +96,17 @@
             </div>
           {%- endfor -%}
         {%- else -%}
-          <div class="color-selection">
-            <span>{{ section.settings.variant_label }}</span>
-            <span class="color-swatch" aria-hidden="true">{% render 'icon', name: 'check', size: 15 %}</span>
-          </div>
+          {%- comment -%}
+            Only shown when the template actually sets a label. The accessories share one
+            template, and any fixed wording here was wrong for most of them — a white water
+            bottle was being sold as "Colour — Black".
+          {%- endcomment -%}
+          {%- if section.settings.variant_label != blank -%}
+            <div class="color-selection">
+              <span>{{ section.settings.variant_label }}</span>
+              <span class="color-swatch" aria-hidden="true">{% render 'icon', name: 'check', size: 15 %}</span>
+            </div>
+          {%- endif -%}
         {%- endunless -%}
 
         <div class="product-inclusions">
