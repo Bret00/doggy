@@ -1,13 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "shop-product": {
       "type": "shop-product",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "judge_me_reviews_review_widget_zEMFe7": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_zEMFe7"
+      ],
       "settings": {
         "anchor_id": "",
+        "product": "",
         "eyebrow": "ROADNEST",
         "gallery_tag": "BUILT FOR THE BACK SEAT",
+        "summary": "",
         "variant_label": "",
         "reassurance_note": "Ships within 2 business days. Delivery 1–2 weeks across Canada and the US, with tracking. 30-day money-back guarantee."
       }
