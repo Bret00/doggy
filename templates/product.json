@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "shop-product": {
@@ -40,6 +49,15 @@
             "title": "Fit",
             "content": "<p>Fits most SUVs, trucks with a back bench, and larger crossovers and wagons. Standard sedans work with a shorter platform section. Not for compact two-doors. Email us your year, make and model if you are unsure.</p>"
           }
+        },
+        "judge_me_reviews_review_widget_nM4Kac": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
         }
       },
       "block_order": [
@@ -48,10 +66,25 @@
         "inclusion-3",
         "inclusion-4",
         "accordion_item-5",
-        "accordion_item-6"
+        "accordion_item-6",
+        "judge_me_reviews_review_widget_nM4Kac"
       ],
       "settings": {
-        "anchor_id": ""
+        "anchor_id": "",
+        "product": "",
+        "eyebrow": "THE ROADNEST PLATFORM",
+        "gallery_tag": "ONE FLAT BED FOR THE BACK SEAT",
+        "summary": "",
+        "variant_label": "Colour — Black",
+        "reassurance_note": "Ships within 2 business days. Delivery 1–2 weeks across Canada and the US, with tracking. 30-day money-back guarantee."
+      }
+    },
+    "product-description": {
+      "type": "product-description",
+      "settings": {
+        "eyebrow": "THE FULL DETAIL",
+        "heading_line1": "Everything",
+        "heading_line2": "about it."
       }
     },
     "feature-strip": {
@@ -148,14 +181,11 @@
         "faq-5",
         "faq-6"
       ],
-      "settings": {}
-    },
-    "product-description": {
-      "type": "product-description",
       "settings": {
-        "eyebrow": "THE FULL DETAIL",
-        "heading_line1": "Everything",
-        "heading_line2": "about it."
+        "anchor_id": "questions",
+        "eyebrow": "COMMON QUESTIONS",
+        "heading": "Common questions.",
+        "subtext": "The things people ask before ordering."
       }
     }
   },
