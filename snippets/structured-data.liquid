@@ -9,6 +9,12 @@
 {%- liquid
   assign og_title = page_title | default: shop.name
   assign og_description = page_description | default: shop.description | default: shop.name
+
+  # The sitelinks-search target has to carry a literal {search_term_string} placeholder.
+  # Written inline in an output tag, Liquid's parser hits the brace and never finds the
+  # closing }}, and Shopify rejects the whole file — silently, on a GitHub sync. Built as
+  # an assign instead, where braces inside a quoted string are not special.
+  assign search_target = request.origin | append: routes.search_url | append: '?q={search_term_string}'
 -%}
 
 {%- if template.name == 'product' and product != blank -%}
@@ -22,8 +28,8 @@
     "url": {{ request.origin | append: product.url | json }},
     {%- comment -%}
       Loop images, not media. product.media includes the video, and skipping it inside the
-      loop left a trailing comma whenever the video was the last item — which it is on the
-      flagship — producing invalid JSON that Google discards wholesale. product.images
+      loop left a trailing comma whenever the video was the last item -- which it is on the
+      flagship -- producing invalid JSON that Google discards wholesale. product.images
       contains only images, so forloop.last is trustworthy.
     {%- endcomment -%}
     {%- if product.images.size > 0 -%}
@@ -80,7 +86,7 @@
     "url": {{ request.origin | json }},
     "potentialAction": {
       "@type": "SearchAction",
-      "target": {{ request.origin | append: routes.search_url | append: "?q={search_term_string}" | json }},
+      "target": {{ search_target | json }},
       "query-input": "required name=search_term_string"
     }
   }
