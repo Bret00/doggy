@@ -97,8 +97,8 @@
         "detail-3": {
           "type": "detail",
           "settings": {
-            "title": "Shipping takes 1–2 weeks.",
-            "text": "Most orders ship within 2 business days. Delivery is usually 1–2 weeks across Canada and the US, with tracking.",
+            "title": "Shipping takes 2-3 weeks.",
+            "text": "Most orders ship within 2 business days. Delivery is usually 2-3 weeks across Canada and the US, with tracking.",
             "icon": "maximize-2"
           }
         }

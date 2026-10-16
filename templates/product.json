@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "shop-product": {
@@ -71,20 +62,7 @@
       ],
       "settings": {
         "anchor_id": "",
-        "product": "",
-        "eyebrow": "THE ROADNEST PLATFORM",
-        "gallery_tag": "ONE FLAT BED FOR THE BACK SEAT",
-        "summary": "",
-        "variant_label": "Colour — Black",
-        "reassurance_note": "Ships within 2 business days. Delivery 1–2 weeks across Canada and the US, with tracking. 30-day money-back guarantee."
-      }
-    },
-    "product-description": {
-      "type": "product-description",
-      "settings": {
-        "eyebrow": "THE FULL DETAIL",
-        "heading_line1": "Everything",
-        "heading_line2": "about it."
+        "reassurance_note": "Ships within 2 business days. Delivery 2-3 weeks across Canada and the US, with tracking. 30-day money-back guarantee."
       }
     },
     "feature-strip": {
@@ -155,7 +133,7 @@
           "type": "faq",
           "settings": {
             "question": "How long is shipping?",
-            "answer": "<p>Most orders ship within 2 business days. Delivery is usually 1–2 weeks across Canada and the US, with tracking.</p>"
+            "answer": "<p>Most orders ship within 2 business days. Delivery is usually 2-3 weeks across Canada and the US, with tracking.</p>"
           }
         },
         "faq-5": {
@@ -181,11 +159,14 @@
         "faq-5",
         "faq-6"
       ],
+      "settings": {}
+    },
+    "product-description": {
+      "type": "product-description",
       "settings": {
-        "anchor_id": "questions",
-        "eyebrow": "COMMON QUESTIONS",
-        "heading": "Common questions.",
-        "subtext": "The things people ask before ordering."
+        "eyebrow": "THE FULL DETAIL",
+        "heading_line1": "Everything",
+        "heading_line2": "about it."
       }
     }
   },
